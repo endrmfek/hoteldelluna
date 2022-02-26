@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
   <head>
@@ -19,8 +20,13 @@
 
     <!--Custom styles-->
 
-    <link rel="stylesheet" href="assets/css/login.css" />
-    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/login.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css" />
+    
+    <script type="text/javascript" charset="utf-8">
+   		
+    </script>
+    
   </head>
   <body>
     <header>
@@ -32,7 +38,7 @@
               <!-- logo -->
               <div class="col-xl-2 col-lg-2">
                 <div class="logo">
-                  <a href="index.html"><img src="assets/img/logo/logo1.png" width="180" height="70" alt="" /></a>
+                  <a href="index.html"><img src="./assets/img/logo/logo1.png" width="180" height="70" alt="" /></a>
                 </div>
               </div>
               <div class="col-xl-8 col-lg-8">
@@ -90,34 +96,32 @@
             </div>
           </div>
           <div class="card-body">
-            <form>
+            <form action="login" method="post">
               <div class="input-group form-group">
                 <div class="input-group-prepend">
                   <span class="input-group-text"><i class="fas fa-user"></i></span>
                 </div>
-                <input type="text" class="form-control" placeholder="username" />
+                <input type="text" class="form-control" placeholder="username" name="username"/>
               </div>
               <div class="input-group form-group">
                 <div class="input-group-prepend">
                   <span class="input-group-text"><i class="fas fa-key"></i></span>
                 </div>
-                <input type="password" class="form-control" placeholder="password" />
+                <input type="password" class="form-control" placeholder="password" name="password"/>
               </div>
               <div class="row align-items-center remember"><input type="checkbox" />Remember Me</div>
               <div class="login">
                 <input type="submit" value="Login" class="btn float-right login_btn" />
 
-                <!-- <a href="https://kauth.kakao.com/oauth/authorize?client_id=48737620c593caca588046368e70632c&redirect_uri=http://localhost:8080/myProject/index&response_type=code">
-                  <img src="assets/img/logo/kakao_login_medium_narrow.png" style="display: block; margin: auto"
-                /></a> -->
-                <a href="mypage.html">
+                <a href="https://kauth.kakao.com/oauth/authorize?client_id=48737620c593caca588046368e70632c&redirect_uri=http://localhost:8080/HotelDelLuna/login&response_type=code">
                   <img src="assets/img/logo/kakao_login_medium_narrow.png" style="display: block; margin: auto"
                 /></a>
+                
               </div>
             </form>
           </div>
           <div class="card-footer">
-            <div class="d-flex justify-content-center links">Don't have an account?<a href="regform.jsp">Sign Up</a></div>
+            <div class="d-flex justify-content-center links">Don't have an account?<a href="loginform">Sign Up</a></div>
             <div class="d-flex justify-content-center">
               <a href="#">Forgot your password?</a>
             </div>
@@ -125,5 +129,12 @@
         </div>
       </div>
     </div>
+    
+    <c:if test="${logincheck == false }">
+		<script >
+			alert("아이디와 비밀번호를 확인해주세요");
+			//location.href = "index";
+		</script>
+	</c:if>
   </body>
 </html>

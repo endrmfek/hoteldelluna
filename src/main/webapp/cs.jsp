@@ -23,7 +23,7 @@
   <link rel="stylesheet" href="assets/css/themify-icons.css">
   <link rel="stylesheet" href="assets/css/slick.css">
   <link rel="stylesheet" href="assets/css/nice-select.css">
-  <link rel="stylesheet" href="assets/css/reserv.css">
+  <link rel="stylesheet" href="assets/css/reserv.css?ver=1">
   <link rel="stylesheet" href="assets/css/responsive.css">
   <link rel="stylesheet" href="assets/css/cs.css">
 </head>

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!doctype html>
 <html class="no-js" lang="zxx">
     <head>
@@ -13,18 +14,18 @@
         <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
 
         <!-- CSS here -->
-            <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
-            <link rel="stylesheet" href="./assets/css/owl.carousel.min.css">
-            <link rel="stylesheet" href="./assets/css/gijgo.css">
-            <link rel="stylesheet" href="./assets/css/slicknav.css">
-            <link rel="stylesheet" href="./assets/css/animate.min.css">
-            <link rel="stylesheet" href="./assets/css/magnific-popup.css">
-            <link rel="stylesheet" href="./assets/css/fontawesome-all.min.css">
-            <link rel="stylesheet" href="./assets/css/themify-icons.css">
-            <link rel="stylesheet" href="./assets/css/slick.css">
-            <link rel="stylesheet" href="./assets/css/nice-select.css">
-            <link rel="stylesheet" href="./assets/css/style.css">
-            <link rel="stylesheet" href="./assets/css/responsive.css">
+            <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+            <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
+            <link rel="stylesheet" href="assets/css/gijgo.css">
+            <link rel="stylesheet" href="assets/css/slicknav.css">
+            <link rel="stylesheet" href="assets/css/animate.min.css">
+            <link rel="stylesheet" href="assets/css/magnific-popup.css">
+            <link rel="stylesheet" href="assets/css/fontawesome-all.min.css">
+            <link rel="stylesheet" href="assets/css/themify-icons.css">
+            <link rel="stylesheet" href="assets/css/slick.css">
+            <link rel="stylesheet" href="assets/css/nice-select.css">
+            <link rel="stylesheet" href="assets/css/style.css">
+            <link rel="stylesheet" href="assets/css/responsive.css">
             
 </head>
 
@@ -83,7 +84,13 @@
                         <div class="col-xl-2 col-lg-2">
                             <!-- header-btn -->
                             <div class="header-btn">
-                                <a href="login.jsp" class="btn btn1 d-none d-lg-block ">Login / Sign up</a>
+                            	<c:if test="${sessionId == null }">
+									<a href="login" class="btn btn1 d-none d-lg-block ">Login / Sign up</a>	
+								</c:if>
+								<c:if test="${sessionId != null }">
+									<a href="mypage.jsp" class="btn btn1 d-none d-lg-block ">My page</a>	
+								</c:if>
+                                
                             </div>
                         </div>
                         <!-- Mobile Menu -->
@@ -251,7 +258,7 @@
                 </div>
                     <!-- Single Select Box -->
                     <div class="single-select-box pt-45 mb-30">
-                        <a href="rooms.jsp" class="btn select-btn">Book Now</a>
+                        <a href="rooms.html" class="btn select-btn">Book Now</a>
                 </div>
                 </div>
             </form>

@@ -20,8 +20,8 @@
     />
 
     <!-- Main css -->
-    <link rel="stylesheet" href="assets/css/style.css" />
-    <link rel="stylesheet" href="assets/css/regform.css" />
+    <link rel="stylesheet" href="./assets/css/style.css" />
+    <link rel="stylesheet" href="./assets/css/regform.css" />
   </head>
   <body>
     <header>
@@ -33,7 +33,7 @@
               <!-- logo -->
               <div class="col-xl-2 col-lg-2">
                 <div class="logo">
-                  <a href="index.html"><img src="assets/img/logo/logo1.png" width="180" height="70" alt="" /></a>
+                  <a href="index"><img src="assets/img/logo/logo1.png" width="180" height="70" alt="" /></a>
                 </div>
               </div>
               <div class="col-xl-8 col-lg-8">
@@ -83,13 +83,13 @@
         <!-- <img src="images/signup-bg.jpg" alt=""> -->
         <div class="r_container">
           <div class="signup-content">
-            <form method="POST" id="signup-form" class="signup-form">
+            <form method="POST" id="signup-form" class="signup-form" action="loginform">
               <div class="hi1">
                 <span>REGESTER FORM</span>
               </div>
               <div class="form-group">
                 <label for="email">ID</label>
-                <input type="email" class="form-input" name="id" id="id" />
+                <input type="text" class="form-input" name="id" id="id" />
               </div>
               <div class="form-row">
                 <div class="form-group">
@@ -114,7 +114,7 @@
               <div class="form-row">
                 <div class="form-group form-icon">
                   <label for="birth_date">Birth date</label>
-                  <input type="text" class="form-input" name="birth_date" id="birth_date" placeholder="MM-DD-YYYY" />
+                  <input type="text" class="form-input" name="birth_date" id="birth_date" placeholder="YYYY-MM-DD" />
                 </div>
                 <div class="form-radio">
                   <label for="gender">Gender</label>
