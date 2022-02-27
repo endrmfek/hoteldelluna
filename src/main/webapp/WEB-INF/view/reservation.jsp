@@ -130,12 +130,9 @@
   <!-- ================ contact section start ================= -->
   <section class="contact-section">
     <div class="container">
-        
-            <script>
-                
-            </script>
   <div class="section-top-border text-left">
     <div class="row">
+    
         <div class="col-12">
             <h2 class="contact-title">Reservation info</h2>
         </div>
@@ -146,7 +143,7 @@
                     
                     <div id="s2">
                     <div class="col-lg-8">
-                        <form class="form-contact contact_form" action="contact_process.php" method="post" id="contactForm" novalidate="novalidate">
+                        <form class="form-contact contact_form" action="reservation" method="post" id="contactForm" novalidate="novalidate">
                             <div class="row">
                                 
                                 <div class="col-sm-2">
@@ -206,7 +203,7 @@
                     </div>
                     <div id="s2">
                     <div class="col-lg-8">
-                        <form class="form-contact contact_form" action="contact_process.php" method="post" id="contactForm" novalidate="novalidate">
+                        <form class="form-contact contact_form" action="reservation" method="post" id="contactForm" novalidate="novalidate">
                             <div class="row">
                                 
                                 <div class="col-sm-2">
@@ -286,10 +283,15 @@
                                         <input class="form-control valid" name="cvc" id="cvc" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'cvc'" placeholder="cvc">
                                     </div>
                                 </div>
-                            </div> 
+                            </div>
+                            <div class="form-group mt-3" align="right">
+   								<button type="submit" class="button button-contactForm boxed-btn">Send</button>
+    							<button type="submit" class="button button-contactForm boxed-btn" name="kakao">카카오페이 결제</button>
+							</div> 
+                            </form>
                         </div>
                         
-                        </form>
+                        
                     </div>
                     <div class="col-12">
                         <h2 class="contact-title">Important info</h2>
@@ -353,11 +355,14 @@
                     </div>            
            </div>
         </div>
+        
 </div>
-<div class="form-group mt-3" align="right">
+<!-- <div class="form-group mt-3" align="right">
     <button type="submit" class="button button-contactForm boxed-btn">Send</button>
+    <button type="submit" class="button button-contactForm boxed-btn" name="kakao">카카오페이 결제</button>
+</div> -->
 </div>
-    </div>
+</div>
 </section>
 <!-- ================ contact section end ================= -->
 

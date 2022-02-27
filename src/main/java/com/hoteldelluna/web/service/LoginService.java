@@ -38,7 +38,8 @@ public class LoginService {
 	public void insertLogin(Login login) {
 		int result = 0;
 		
-		String sql = "insert into login (id, pwd, repwd, name, birth, gender, email, phone, isdel) VALUES ( ? , ? , ? , ? , ? , ? , ? , ? , 0)";
+		//String sql1 = "insert into login (id, pwd, repwd, name, birth, gender, email, phone, isdel) VALUES ( ? , ? , ? , ? , ? , ? , ? , ? , 0)";
+		String sql = "insert into users (u_id, u_pwd, u_name, u_birth, u_phone, u_email, u_gender) VALUES ( ? , ? , ? , ? , ? , ? , ? )";
 		
 		String url = "jdbc:oracle:thin:@localhost:1521/orclpdb";
 		
@@ -48,12 +49,11 @@ public class LoginService {
 			PreparedStatement st = con.prepareStatement(sql);
 			st.setString(1,login.getId());
 			st.setString(2, login.getPwd());
-			st.setString(3, login.getRePwd());
-			st.setString(4, login.getName());
-			st.setString(5, login.getBirth());
-			st.setString(6, login.getGender());
-			st.setString(7, login.getEmail());
-			st.setString(8, login.getPhone());
+			st.setString(3, login.getName());
+			st.setString(4, login.getBirth());
+			st.setString(5, login.getPhone());
+			st.setString(6, login.getEmail());
+			st.setString(7, login.getGender());
 			
 			result = st.executeUpdate();
 			
@@ -75,7 +75,7 @@ public class LoginService {
 		List<Login> list = new ArrayList<Login>();
 		boolean result = false;
 		
-		String sql = "SELECT ID , PWD FROM LOGIN";
+		String sql = "SELECT u_id , u_pwd FROM users";
 		String url = "jdbc:oracle:thin:@localhost:1521/orclpdb";
 		
 
@@ -87,8 +87,8 @@ public class LoginService {
 			ResultSet rs = st.executeQuery(sql);
 
 			while (rs.next()) {
-				String id_ = rs.getString("ID");
-				String password_ = rs.getString("PWD");
+				String id_ = rs.getString("u_id");
+				String password_ = rs.getString("u_pwd");
 				
 				System.out.println(id_);
 				
@@ -115,7 +115,7 @@ public class LoginService {
 
 		List<Login> list = new ArrayList<Login>();
 		
-		String sql = "SELECT * FROM LOGIN";
+		String sql = "SELECT * FROM users";
 		String url = "jdbc:oracle:thin:@localhost:1521/orclpdb";
 		
 		try {
@@ -125,17 +125,17 @@ public class LoginService {
 			ResultSet rs = st.executeQuery(sql);
 
 			while (rs.next()) {
-				String id = rs.getString("id");
-				String pwd = rs.getString("pwd");
-				String repwd = rs.getString("repwd");
-				String name = rs.getString("name");
-				String birth = rs.getString("birth");
-				String gender = rs.getString("gender");
-				String email = rs.getString("email");
-				String phone = rs.getString("phone");
-				int isdel = rs.getInt("isdel");
+				String id = rs.getString("u_id");
+				String pwd = rs.getString("u_pwd");
+				String name = rs.getString("u_name");
+				String birth = rs.getString("u_birth");
+				String gender = rs.getString("u_gender");
+				String email = rs.getString("u_email");
+				String phone = rs.getString("u_phone");
+				String date = rs.getString("u_date");
 
-				Login login = new Login(id, pwd, repwd, name, birth, gender, email, phone, isdel);
+
+				Login login = new Login(id, pwd, name, birth, gender, email, phone, date);
 				list.add(login);
 				
 			}

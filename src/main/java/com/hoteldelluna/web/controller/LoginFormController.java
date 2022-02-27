@@ -29,7 +29,6 @@ public class LoginFormController extends HttpServlet{
 		
 		String id = request.getParameter("id");
 		String pwd = request.getParameter("password");
-		String rePwd = request.getParameter("re_password");
 		String name = request.getParameter("first_name") + request.getParameter("last_name");
 		String birth = request.getParameter("birth_date");
 		String gender = request.getParameter("gender");
@@ -39,7 +38,6 @@ public class LoginFormController extends HttpServlet{
 		Login login = new Login();
 		login.setId(id);
 		login.setPwd(pwd);
-		login.setRePwd(rePwd);
 		login.setName(name);
 		login.setBirth(birth);
 		login.setGender(gender);
