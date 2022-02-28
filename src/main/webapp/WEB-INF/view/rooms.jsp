@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!doctype html>
 <html class="no-js" lang="zxx">
 
@@ -123,180 +124,37 @@
           </div>
         </div>
         <div class="row">
+        <c:forEach var="r" items="${room}">
           <div class="col-xl-4 col-lg-6 col-md-6">
             <!-- Superior Single Room -->
             <div class="single-room mb-50">
               <div class="room-img">
-                <a href="room_detail.jsp"><img src="assets/img/rooms/room2.jpg" alt=""></a>
+                <a href="roomDetail?roomNo=${r.r_no}"><img src="assets/img/rooms/${r.r_img}" alt=""></a>
               </div>
               <div class="room-caption">
-                <h3><a href="#">Superior Single Room</a></h3>
+                <h3><a href="#">${r.r_roomtype}</a></h3>
                 <div class="room-info">
                   <div class="room-info-menu">
                     <ion-icon name="bed"></ion-icon>
                     <span class="room-info-title">Bed type</span>
-                    <strong class="room-info-text">Single</strong>
+                    <strong class="room-info-text">${r.r_bedtype} </strong>
                   </div>
                   <div class="room-info-menu">
                     <ion-icon name="people-sharp"></ion-icon>
                     <strong class="room-info-title">Occupancy</strong>
-                    <span class="room-info-text">1 Person</span>
+                    <span class="room-info-text">${r.r_occupancy}  Person</span>
                   </div>
                 </div>
                 <hr />
                 <div class="room-price">
                   <span class="room-price-start">From</span>
-                  <strong class="room-price-number">110,000</strong>
+                  <strong class="room-price-number">${r.r_price} </strong>
                   <span class="room-price-currency">KRW</span>
                 </div>
               </div>
             </div>
           </div>
-          <div class="col-xl-4 col-lg-6 col-md-6">
-            <!-- Superior Room -->
-            <div class="single-room mb-50">
-              <div class="room-img">
-                <a href="room_detail.jsp"><img src="assets/img/rooms/room1.jpg" alt=""></a>
-              </div>
-              <div class="room-caption">
-                <h3><a href="#">Superior Room</a></h3>
-                <div class="room-info">
-                  <div class="room-info-menu">
-                    <ion-icon name="bed"></ion-icon>
-                    <strong class="room-info-title">Bed type</strong>
-                    <span class="room-info-text">Double&#47;Twin</span>
-                  </div>
-                  <div class="room-info-menu">
-                    <ion-icon name="people-sharp"></ion-icon>
-                    <strong class="room-info-title">Occupancy</strong>
-                    <span class="room-info-text">2 Persons</span>
-                  </div>
-                </div>
-                <hr />
-                <div class="room-price">
-                  <span class="room-price-start">From</span>
-                  <strong class="room-price-number">157,000</strong>
-                  <span class="room-price-currency">KRW</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-xl-4 col-lg-6 col-md-6">
-            <!-- Superior Triple Room -->
-            <div class="single-room mb-50">
-              <div class="room-img">
-                <a href="room_detail.jsp"> <img src="assets/img/rooms/room3.jpg" alt=""></a>
-              </div>
-              <div class="room-caption">
-                <h3><a href="rooms.html">Superior Triple Room</a></h3>
-                <div class="room-info">
-                  <div class="room-info-menu">
-                    <ion-icon name="bed"></ion-icon>
-                    <strong class="room-info-title">Bed type</strong>
-                    <span class="room-info-text">Double&#47;Twin&#32;&#43;&#32;Extra Bed</span>
-                  </div>
-                  <div class="room-info-menu">
-                    <ion-icon name="people-sharp"></ion-icon>
-                    <strong class="room-info-title">Occupancy</strong>
-                    <span class="room-info-text">2 Persons</span>
-                  </div>
-                </div>
-                <hr />
-                <div class="room-price">
-                  <span class="room-price-start">From</span>
-                  <strong class="room-price-number">213,000</strong>
-                  <span class="room-price-currency">KRW</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-xl-4 col-lg-6 col-md-6">
-            <!-- Deluxe Room -->
-            <div class="single-room mb-50">
-              <div class="room-img">
-                <a href="rooms.html"><img src="assets/img/rooms/room4.jpg" alt=""></a>
-              </div>
-              <div class="room-caption">
-                <h3><a href="rooms.html">Deluxe Room</a></h3>
-                <div class="room-info">
-                  <div class="room-info-menu">
-                    <ion-icon name="bed"></ion-icon>
-                    <strong class="room-info-title">Bed type</strong>
-                    <span class="room-info-text">Double&#47;Twin</span>
-                  </div>
-                  <div class="room-info-menu">
-                    <ion-icon name="people-sharp"></ion-icon>
-                    <strong class="room-info-title">Occupancy</strong>
-                    <span class="room-info-text">2 Persons</span>
-                  </div>
-                </div>
-                <hr />
-                <div class="room-price">
-                  <span class="room-price-start">From</span>
-                  <strong class="room-price-number">273,000</strong>
-                  <span class="room-price-currency">KRW</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-xl-4 col-lg-6 col-md-6">
-            <!-- Deluxe Suite Room -->
-            <div class="single-room mb-50">
-              <div class="room-img">
-                <a href="rooms.html"><img src="assets/img/rooms/room5.jpg" alt=""></a>
-              </div>
-              <div class="room-caption">
-                <h3><a href="rooms.html">Deluxe Suite Room</a></h3>
-                <div class="room-info">
-                  <div class="room-info-menu">
-                    <ion-icon name="bed"></ion-icon>
-                    <strong class="room-info-title">Bed type</strong>
-                    <span class="room-info-text">Double&#47;Twin</span>
-                  </div>
-                  <div class="room-info-menu">
-                    <ion-icon name="people-sharp"></ion-icon>
-                    <strong class="room-info-title">Occupancy</strong>
-                    <span class="room-info-text">2 Persons</span>
-                  </div>
-                </div>
-                <hr />
-                <div class="room-price">
-                  <span class="room-price-start">From</span>
-                  <strong class="room-price-number">357,000</strong>
-                  <span class="room-price-currency">KRW</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-xl-4 col-lg-6 col-md-6">
-            <!-- Premier Family Room -->
-            <div class="single-room mb-50">
-              <div class="room-img">
-                <a href="rooms.html"> <img src="assets/img/rooms/room6.jpg" alt=""></a>
-              </div>
-              <div class="room-caption">
-                <h3><a href="rooms.html">Premier Family Room</a></h3>
-                <div class="room-info">
-                  <div class="room-info-menu">
-                    <ion-icon name="bed"></ion-icon>
-                    <strong class="room-info-title">Bed type</strong>
-                    <span class="room-info-text">Double&#47;Twin</span>
-                  </div>
-                  <div class="room-info-menu">
-                    <ion-icon name="people-sharp"></ion-icon>
-                    <strong class="room-info-title">Occupancy</strong>
-                    <span class="room-info-text">4 Persons</span>
-                  </div>
-                </div>
-                <hr />
-                <div class="room-price">
-                  <span class="room-price-start">From</span>
-                  <strong class="room-price-number">417,000</strong>
-                  <span class="room-price-currency">KRW</span>
-                </div>
-              </div>
-            </div>
-          </div>
+         </c:forEach>
         </div>
         <div class="row justify-content-center">
           <div class="room-btn pt-70">

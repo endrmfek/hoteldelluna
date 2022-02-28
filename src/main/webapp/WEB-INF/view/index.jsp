@@ -64,13 +64,17 @@
                                         <li><a href="index.html">Home</a></li>
                                         <li><a href="about.html">Notice</a></li>
                                         <li><a href="services.html">Q&A</a></li>
-                                        <!-- <li><a href="blog.html">Community</a> -->
+                                        <c:if test="${sessionId != null }">
+											<li><a href="mypage.jsp">My Page</a></li>	
+										</c:if>
+                                        
+                                        <!-- <li><a href="blog.html">Community</a>
                                             <ul class="submenu">
                                                 <li><a href="blog.html">Blog</a></li>
                                                 <li><a href="single-blog.html">Blog Details</a></li>
                                             </ul>
                                         </li>
-                                        <!-- <li><a href="#">Pages</a>
+                                        <li><a href="#">Pages</a>
                                             <ul class="submenu">
                                                 <li><a href="rooms.html">Rooms</a>
                                                 <li><a href="elements.html">Element</a></li>
@@ -86,9 +90,10 @@
                             <div class="header-btn">
                             	<c:if test="${sessionId == null }">
 									<a href="login" class="btn btn1 d-none d-lg-block ">Login / Sign up</a>	
+									
 								</c:if>
 								<c:if test="${sessionId != null }">
-									<a href="mypage.jsp" class="btn btn1 d-none d-lg-block ">My page</a>	
+									<a href="logout" class="btn btn1 d-none d-lg-block ">Log Out</a>
 								</c:if>
                                 
                             </div>
@@ -211,6 +216,7 @@
                             <form action="#">
                                 <div class="select-itms">
                                     <select name="select" id="select1">
+                                    	<option value="">0</option>
                                         <option value="">1</option>
                                         <option value="">2</option>
                                         <option value="">3</option>
@@ -229,6 +235,7 @@
                             <form action="#">
                                 <div class="select-itms">
                                     <select name="select" id="select2">
+                                    	<option value="">0</option>
                                         <option value="">1</option>
                                         <option value="">2</option>
                                         <option value="">3</option>
@@ -239,7 +246,7 @@
                         </div>
                 </div>
                     <!-- Single Select Box -->
-                    <div class="single-select-box mb-30">
+                    <!-- <div class="single-select-box mb-30">
                         <div class="boking-tittle">
                             <span>Rooms:</span>
                         </div>
@@ -255,7 +262,7 @@
                                 </div>
                             </form>
                         </div>
-                </div>
+                	</div> -->
                     <!-- Single Select Box -->
                     <div class="single-select-box pt-45 mb-30">
                         <a href="rooms.html" class="btn select-btn">Book Now</a>
@@ -721,6 +728,8 @@
         <!-- Jquery Plugins, main Jquery -->	
         <script src="./assets/js/plugins.js"></script>
         <script src="./assets/js/main.js"></script>
+        
+        <script src="./assets/vendor/date-picker/js/datepicker.js"></script>
         
     </body>
 </html>

@@ -120,7 +120,8 @@ public class LoginService {
 		
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
-			Connection con = DriverManager.getConnection(url, "MINSOO", "11111");
+//			Connection con = DriverManager.getConnection(url, "MINSOO", "11111");
+			Connection con = dataSource.getConnection();
 			Statement st = con.createStatement();
 			ResultSet rs = st.executeQuery(sql);
 

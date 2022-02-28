@@ -226,7 +226,11 @@
   new WOW().init();
 
   /* 11. Datepicker */
-  $('#datepicker1').datepicker();
+  $('#datepicker1').datepicker({
+	days:['일','월','화','수','목','금','토'],	
+	daysShort:['일','월','화','수','목','금','토'],
+	daysMin:['일','월','화','수','목','금','토']	
+  });
   $('#datepicker2').datepicker();
   $('#datepicker3').datepicker();
   $('#datepicker4').datepicker();

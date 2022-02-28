@@ -18,10 +18,60 @@
       integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
       crossorigin="anonymous"
     />
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script type="text/javascript" src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
 
     <!-- Main css -->
     <link rel="stylesheet" href="./assets/css/style.css" />
     <link rel="stylesheet" href="./assets/css/regform.css" />
+    <script type="text/javascript">
+    const id_overlap_check = function() { // id 중복체크 갑시당
+    	var check = false;
+    	
+    	console.log($("label[for = 'id' ]").children('span').remove());
+    	$.ajax( {
+    		url:'./loginCheck',
+    		type:'get',
+    		dataType:'json',
+    		data: {
+    			check : true //이건 무시
+    		},
+    	
+    		success: function(json) {
+    			
+    			$.each( json.result, function(index, item) {
+    				
+    				if($("#id").val() == item.id) {
+    					$("label[for = 'id' ]").append('<span style="color:red;">중복이다 친구야 ^^</span>');
+    					check=true;
+    				}
+    			});
+    			if(!check) {
+    				$("label[for = 'id' ]").append('<span style="color:blue;">합격 !</span>');	
+    			}
+    			
+    			
+    		},
+    		error: function(e) {
+    			alert('서버에러 : ' + e.status);
+    		}
+    	})
+    
+    }
+    
+    const pwd_overlap_check = function() { // pwd 중복체크 갑시당
+    	var check = false;
+    	if($("#password").val() != $("#re_password").val()) {
+    		$("#pwd_check_text").text("안될것같은데요?").css({"color":"red"});    		
+    	} else {
+    		$("#pwd_check_text").text("합격").css({"color":"blue"});
+    	}
+    }
+    
+    
+    	
+    </script>
+    
   </head>
   <body>
     <header>
@@ -87,10 +137,19 @@
               <div class="hi1">
                 <span>REGESTER FORM</span>
               </div>
-              <div class="form-group">
-                <label for="email">ID</label>
-                <input type="text" class="form-input" name="id" id="id" />
+              <div class="form-row">
+	              <div class="form-group">
+	                <label for="id">ID </label>
+	                <input type="text" class="form-input" name="id" id="id" />
+	                
+	              </div>
+	              <div class="form-inline">
+	                <!-- <label for="email">ID</label> -->
+	                <input type="button" class="form-input" id="id_overlap" value="중복확인" onclick="id_overlap_check()"/>
+	                
+	              </div>
               </div>
+              
               <div class="form-row">
                 <div class="form-group">
                   <label for="password">Password</label>
@@ -98,9 +157,11 @@
                 </div>
                 <div class="form-group">
                   <label for="re_password">Repeat your password</label>
-                  <input type="password" class="form-input" name="re_password" id="re_password" />
+                  <input type="password" class="form-input" name="re_password" id="re_password" onkeyup="pwd_overlap_check()"/>
+                  <span id="pwd_check_text"></span>
                 </div>
               </div>
+              
               <div class="form-row">
                 <div class="form-group">
                   <label for="first_name">First name</label>

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
    <!DOCTYPE html>
    <html class="no-js" lang="zxx">
    <head>
@@ -124,7 +125,7 @@
             </div>
       </div>
       <!-- Gallery img End-->
-
+		<c:set var="r" value="${room}"/>
       <!--================Blog Area =================-->
       <section class="blog_area single-post-area section-padding">
          <div class="container">
@@ -132,10 +133,10 @@
             <div class="col-lg-8 posts-list">
                <div class="single-post">
                <div class="feature-img">
-                  <img class="img-fluid" src="assets/img/blog/paradise.jpg" alt="" />
+                  <img class="img-fluid" src="assets/img/rooms/${r.r_img }" alt="" />
                </div>
                <div class="blog_details">
-                  <h2>인천 파라다이스 호텔</h2>
+                  <h2>${r.r_roomtype}</h2>
                   <ul class="blog-info-link mt-3 mb-4">
                      <li>
                      <a href="#"><i class="fa fa-user"></i> 최대인원 2명 침실 1개 침대 1개 욕실 1개</a>
@@ -144,7 +145,7 @@
                      <a href="#commen"><i class="fa fa-comments"></i> 03 Comments</a>
                      </li>
                      <li>
-                        <a href="#commen"><i class="fa fa-star"></i> 4.5</a>
+                        <a href="#commen"><i class="fa fa-star"></i> ${r.r_star} </a>
                         </li>
                   </ul>
                   <hr>
@@ -244,8 +245,8 @@
                </div>
                </div>
                <div class="comments-area" id="commen">
-               <h4>05 Comments</h4>
-               <div class="comment-list">
+               <!-- <h4>05 Comments</h4> -->
+               <!-- <div class="comment-list">
                   <div class="single-comment justify-content-between d-flex">
                      <div class="user justify-content-between d-flex">
                      <div class="thumb">
@@ -295,6 +296,8 @@
                      </div>
                   </div>
                </div>
+               
+               
                <div class="comment-list">
                   <div class="single-comment justify-content-between d-flex">
                      <div class="user justify-content-between d-flex">
@@ -319,9 +322,29 @@
                      </div>
                      </div>
                   </div>
+               </div> -->
+               
+               <div id="disqus_thread"></div>
+				<script>
+				    /**
+				    *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+				    *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
+				    /*
+				    var disqus_config = function () {
+				    this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+				    this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+				    };
+				    */
+				    (function() { // DON'T EDIT BELOW THIS LINE
+				    var d = document, s = d.createElement('script');
+				    s.src = 'https://hoteldelluna.disqus.com/embed.js';
+				    s.setAttribute('data-timestamp', +new Date());
+				    (d.head || d.body).appendChild(s);
+				    })();
+				</script>
+				<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
                </div>
-               </div>
-               <div class="comment-form">
+               <!-- <div class="comment-form">
                <h4>Leave a Reply</h4>
                <form class="form-contact comment_form" action="#" id="commentForm">
                   <div class="row">
@@ -340,17 +363,17 @@
                         <input class="form-control" name="email" id="email" type="email" placeholder="Email" />
                      </div>
                      </div>
-                     <!-- <div class="col-12">
+                     <div class="col-12">
                      <div class="form-group">
                         <input class="form-control" name="website" id="website" type="text" placeholder="Website" />
                      </div>
-                     </div> -->
+                     </div>
                   </div>
                   <div class="form-group">
                      <button type="submit" class="button button-contactForm btn_1 boxed-btn">Send Message</button>
                   </div>
                </form>
-               </div>
+               </div> -->
             </div>
             
             <div class="col-lg-4">
@@ -360,7 +383,7 @@
                
                   <div class="inner">
                      <form action="reservation.jsp">
-                        <h3>$69000 / 박</h3>
+                        <h3>${r.r_price} / 박</h3>
                         <div class="form-row">
                            <div class="form-wrapper">
                               <label for="">Name *</label>
