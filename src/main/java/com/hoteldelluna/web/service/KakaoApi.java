@@ -13,6 +13,8 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import com.hoteldelluna.web.entity.Login;
+
 public class KakaoApi {
 
 	public String getAccessCode(String auth_code) {
@@ -71,6 +73,9 @@ public class KakaoApi {
 	public String getUserInfo(String access_Token) {
 		//HashMap<String, Object> userInfo = new HashMap<String, Object>();
 		String reqUrl = "https://kapi.kakao.com/v2/user/me";
+		String name = "";
+		String email = "";
+		String gender = "";
 		String id = "";
 		try {
 			URL url = new URL(reqUrl);
@@ -94,7 +99,28 @@ public class KakaoApi {
 	        JSONParser json = new JSONParser();
             JSONObject jsonObject = (JSONObject)json.parse(result);
             JSONObject properties = (JSONObject) jsonObject.get("properties");
-	        id = properties.get("nickname").toString();
+            JSONObject kakao_account = (JSONObject) jsonObject.get("kakao_account");
+	        name = properties.get("nickname").toString();
+	        email = (String)kakao_account.get("email");
+	        gender =(String)kakao_account.get("gender");
+	        
+	        int idx = email.indexOf("@");
+	        id = email.substring(0,idx);
+	        
+	        Login login = new Login();
+	        login.setId(id);
+	        login.setName(name);
+	        login.setEmail(email);
+	        login.setGender(gender);
+	        
+	        LoginService service = new LoginService();
+	        System.out.println();
+	        if(!service.KakaoIdCheck(id)) { // 아이디 중복 안되면 넣어라.
+	        	service.insertLogin(login);
+	        }
+	        
+	        
+	        
 	        
 	        
 		}catch (IOException e) {
@@ -103,7 +129,7 @@ public class KakaoApi {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return id;
+		return name;
 	}
 	
 	

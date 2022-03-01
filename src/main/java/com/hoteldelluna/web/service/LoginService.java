@@ -110,6 +110,48 @@ public class LoginService {
 		
 		return result;
 	}
+	
+	public boolean KakaoIdCheck(String id) { //중복이 있으면 참 없으면 false
+		// TODO Auto-generated method stub
+		
+		List<Login> list = new ArrayList<Login>();
+		boolean result = false;
+		
+		String sql = "SELECT u_id FROM users";
+		String url = "jdbc:oracle:thin:@localhost:1521/orclpdb";
+		
+
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+			Connection con = dataSource.getConnection();
+			Statement st = con.createStatement();
+			
+			ResultSet rs = st.executeQuery(sql);
+
+			while (rs.next()) {
+				String id_ = rs.getString("u_id");
+				
+				
+				System.out.println(id_);
+				
+				if (id_.equals(id)) {
+					result = true;
+					break;
+				} 
+			}
+			rs.close();
+			st.close();
+			con.close();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		
+		return result;
+	}
 
 	public List<Login> getLoginList() {
 

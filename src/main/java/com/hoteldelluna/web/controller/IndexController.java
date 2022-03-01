@@ -17,8 +17,9 @@ public class IndexController extends HttpServlet{
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html; charset=utf-8");
 		HttpSession session = request.getSession();
-		System.out.println(session.getAttribute("sessionId"));
+		//System.out.println(session.getAttribute("sessionId"));
 		session.getAttribute("sessionId");
+		
 		//kakaoLogin
 //		String code = request.getParameter("code");
 //		if(code != null) {

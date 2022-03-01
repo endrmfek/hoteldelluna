@@ -382,16 +382,17 @@
 
                
                   <div class="inner">
-                     <form action="reservation.jsp">
+                     <form action="reservation" method="post">
+                     	<input type="hidden" name="roomNo" value="${r.r_no} "/>
                         <h3>${r.r_price} / 박</h3>
                         <div class="form-row">
                            <div class="form-wrapper">
                               <label for="">Name *</label>
-                              <input type="text" class="form-control" placeholder="Your Name">
+                              <input type="text" class="form-control" placeholder="Your Name" name="name">
                            </div>
                            <div class="form-wrapper">
                               <label for="">Phone *</label>
-                              <input type="text" class="form-control" placeholder="Phone">
+                              <input type="text" class="form-control" placeholder="Phone" name="phone">
                            </div>
                         </div>
                         <div class="form-row">
@@ -399,20 +400,21 @@
                               <label for="">Check-in *</label>
                               
                               <div class="boking-datepicker">
-                                    <input id="datepicker1"  placeholder="2022/02/20" />
+                                    <input id="datepicker1"  placeholder="2022/03/01" name="datepicker1"/>
                               </div>
                            </div>
                            <div class="form-wrapper">
                               <label for="">Check-out *</label>
                               <div class="boking-datepicker">
-                                 <input id="datepicker2"  placeholder="2022/02/20" />
+                                 <input id="datepicker2"  placeholder="2022/03/02" name="datepicker2"/>
                               </div>
                            </div>
                         </div>
                         <div class="form-row last">
                            <div class="form-wrapper">
                               <label for="">Adults *</label>
-                              <select name="" id="" class="form-control">
+                              <select name="adult" id="" class="form-control">
+                              	 <option value="0">0</option>
                                  <option value="1">1</option>
                                  <option value="2">2</option>
                                  <option value="3">3</option>
@@ -424,7 +426,8 @@
                            </div>
                            <div class="form-wrapper">
                               <label for="">Chidren *</label>
-                              <select name="" id="" class="form-control">
+                              <select name="child" id="" class="form-control">
+                              	 <option value="0">0</option>
                                  <option value="1">1</option>
                                  <option value="2">2</option>
                                  <option value="3">3</option>
@@ -442,7 +445,7 @@
                            </label>
                         </div>
                         
-                        <button type="submit"data-text="Book Room" >
+                        <button type="submit" data-text="Book Room" >
                            <span>Book Room</span>
                         </button>
                      </form>

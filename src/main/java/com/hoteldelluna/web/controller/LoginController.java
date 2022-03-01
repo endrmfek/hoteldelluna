@@ -3,7 +3,7 @@ package com.hoteldelluna.web.controller;
 
 
 import java.io.IOException;
-import java.util.HashMap;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,6 +20,8 @@ public class LoginController extends HttpServlet{
 	
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.setContentType("text/html; charset=utf-8");
+		
 		//kakaoLogin
 		String code = request.getParameter("code");
 		if(code != null) {
@@ -29,8 +31,15 @@ public class LoginController extends HttpServlet{
 			String id = kakao.getUserInfo(access_code);
 			if(id != null) {
 				session.setAttribute("sessionId", id);
+				
 			}
-			response.sendRedirect("index");
+			
+			PrintWriter out = response.getWriter(); 
+			out.println("<script>alert('환영합니다 "+id+"님'); location.href='index';</script>"); 
+			out.flush();
+
+			
+			
 		} else {
 			request
 		    .getRequestDispatcher("/WEB-INF/view/login.jsp")
@@ -57,7 +66,9 @@ public class LoginController extends HttpServlet{
 			HttpSession session =request.getSession();
 			session.setAttribute("sessionId", id);
 			
-			response.sendRedirect("index");
+			PrintWriter out = response.getWriter(); 
+			out.println("<script>alert('환영합니다 "+id+"님'); location.href='index';</script>"); 
+			out.flush();
 			
 		} else {
 			request.setAttribute("logincheck", logincheck);

@@ -31,6 +31,18 @@
 
 <body>
     
+    <c:if test="${alertcheck == true}">
+		<script >
+			let count = 1;
+			if( count ==1) {
+				alert("${sessionId} 님 환영합니다.");
+				count = count+1;
+			}
+			
+			//location.href = "index";
+		</script>
+	</c:if>
+    
     <!-- Preloader Start -->
     <div id="preloader-active">
         <div class="preloader d-flex align-items-center justify-content-center">

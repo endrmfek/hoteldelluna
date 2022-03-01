@@ -1,8 +1,40 @@
+
+<%@page import="com.hoteldelluna.web.service.UsersService"%>
+<%@page import="com.hoteldelluna.web.entity.Users"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
+<%@ page import="javax.naming.Context" %>
+<%@page import="javax.naming.InitialContext" %>
+<%@ page import="javax.naming.NamingException" %>
+ 
+<%@page import="javax.sql.DataSource" %>
+<%@page import="java.sql.DriverManager" %>
+<%@page import="java.sql.Connection" %>
+<%@page import="java.sql.PreparedStatement" %>
+<%@page import="java.sql.ResultSet" %>
+<%@page import="java.sql.SQLException" %>
+<%
+	request.setCharacterEncoding("utf-8");
+	//int userNumber=Integer.parseInt(request.getParameter("userNumber"));
+	int userNumber=100;
+
+	Users to = new Users();
+	to.setU_no(1);
+	
+	UsersService dao=new UsersService(); 
+	to=dao.mypage(to);
+	
+	String userID=to.getU_id();
+	String userName=to.getU_name();
+	String pwd=to.getU_pwd();
+	String email=to.getU_email();
+	String phone=to.getU_phone();
+	String birth=to.getU_birth();
+
+	
+%>
 <!doctype html>
 <html class="no-js" lang="zxx">
-
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -79,19 +111,31 @@
     <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
 
     <!-- CSS here -->
-    <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="./assets/css/owl.carousel.min.css">
-    <link rel="stylesheet" href="./assets/css/gijgo.css">
-    <link rel="stylesheet" href="./assets/css/slicknav.css">
-    <link rel="stylesheet" href="./assets/css/animate.min.css">
-    <link rel="stylesheet" href="./assets/css/magnific-popup.css">
-    <link rel="stylesheet" href="./assets/css/fontawesome-all.min.css">
-    <link rel="stylesheet" href="./assets/css/themify-icons.css">
-    <link rel="stylesheet" href="./assets/css/slick.css">
-    <link rel="stylesheet" href="./assets/css/nice-select.css">
-    <link rel="stylesheet" href="./assets/css/style.css">
-    <link rel="stylesheet" href="./assets/css/responsive.css">
-
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="assets/css/gijgo.css">
+    <link rel="stylesheet" href="assets/css/slicknav.css">
+    <link rel="stylesheet" href="assets/css/animate.min.css">
+    <link rel="stylesheet" href="assets/css/magnific-popup.css">
+    <link rel="stylesheet" href="assets/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="assets/css/themify-icons.css">
+    <link rel="stylesheet" href="assets/css/slick.css">
+    <link rel="stylesheet" href="assets/css/nice-select.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/cs_boardlist.css">
+	<link href="https://fonts.googleapis.com/css2?family=El+Messiri&display=swap" rel="stylesheet">
+	<script type="text/javascript">
+	window.onload = function() {
+		document.getElementById( 'mbtn' ).onclick = function() {
+			if( document.mfrm.pwd.value.trim() == '' ) {
+				alert( '비밀번호를 입력하셔야 합니다.' );
+				return false;
+			}
+			document.mfrm.submit();
+		};
+	};
+</script>
 </head>
 
 <body>
@@ -118,7 +162,7 @@
                         <!-- logo -->
                         <div class="col-xl-2 col-lg-2">
                             <div class="logo">
-                                <a href="index.html"><img src="assets/img/logo/logo1.png" width="180" height="70"
+                                <a href="index.jsp"><img src="assets/img/logo/logo1.png" width="180" height="70"
                                         alt=""></a>
                             </div>
                         </div>
@@ -127,9 +171,9 @@
                             <div class="main-menu f-right d-none d-lg-block">
                                 <nav>
                                     <ul id="navigation">
-                                        <li><a href="index.html">Home</a></li>
-                                        <li><a href="about.html">Notice</a></li>
-                                        <li><a href="services.html">Q&A</a></li>
+                                        <li><a href="index.jsp">Home</a></li>
+                                        <li><a href="Notice.jsp">Notice</a></li>
+                                        <li><a href="Q&A.jsp">Q&A</a></li>
                                         <!--    <li><a href="blog.html">Community</a>
                                             <ul class="submenu">
                                                 <li><a href="blog.html">Blog</a></li>
@@ -192,12 +236,13 @@
 
                             <div data-tabs class="tabs">
                                 <div class="tab">
-                                    <input type="radio" name="tabgroup" id="tab-1" checked>
+                                    <input type="radio" name="tabgroup" id="tab-1">
                                     <label for="tab-1">계정 정보</label>
                                     <div class="tab__content">
                                         <div id="s2">
-                                            <form class="form-contact contact_form" action="contact_process.php"
-                                                method="post" id="contactForm" novalidate="novalidate">
+                                            <form class="form-contact contact_form" action="mypage_ok.jsp" method="post" id="mfrm" novalidate="novalidate">
+                                                <input type="hidden" name="userNumber" value="<%=userNumber %>"/>                                               
+                                              
                                                 <div class="row">
                                                     <div class="col-sm-2">
                                                         <div class="form-group">
@@ -206,8 +251,8 @@
                                                     </div>
                                                     <div class="col-sm-10">
                                                         <div class="form-group">
-                                                            <input class="form-control valid" name="userID" id="userID"
-                                                                type="text" value="">
+                                                            <input class="form-control valid" name="userID" 
+                                                                type="text" value="<%=userID %>" readonly>
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-2">
@@ -216,18 +261,13 @@
                                                         </div>
                                                     </div>
 
-                                                    <div class="col-sm-5">
+                                                    <div class="col-sm-10">
                                                         <div class="form-group">
-                                                            <input class="form-control valid" name="fname" id="fname"
-                                                                type="text" value="">
+                                                            <input class="form-control valid" name="userName" 
+                                                                type="text" value="<%=userName %>" readonly>
                                                         </div>
                                                     </div>
-                                                    <div class="col-sm-5">
-                                                        <div class="form-group">
-                                                            <input class="form-control valid" name="lname" id="lname"
-                                                                type="text" value="">
-                                                        </div>
-                                                    </div>
+                                                    
                                                     <div class="col-sm-2">
                                                         <div class="form-group">
                                                             <label>password:</label>
@@ -235,8 +275,18 @@
                                                     </div>
                                                     <div class="col-sm-10">
                                                         <div class="form-group">
-                                                            <input class="form-control valid" name="password"
-                                                                id="password" type="password" value="">
+                                                            <input class="form-control valid" name="pwd" type="password" value="">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-2">
+                                                        <div class="form-group">
+                                                            <label>birth:</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-10">
+                                                        <div class="form-group">
+                                                            <input class="form-control valid" name="birth"
+                                                                 type="text" value="<%=birth%>">
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-2">
@@ -244,95 +294,101 @@
                                                             <label>mail:</label>
                                                         </div>
                                                     </div>
-                                                    <div class="col-sm-4">
+                                                    <div class="col-sm-10">
                                                         <div class="form-group">
-                                                            <input class="form-control valid" name="mail1" id="mail1"
-                                                                type="text" value="">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-sm-2" align="center">
-                                                        <div class="form-group">
-                                                            <h5>@</h5>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-sm-4">
-                                                        <div class="form-group">
-                                                            <input class="form-control valid" name="mail2" id="mail2"
-                                                                type="text" value="">
+                                                            <input class="form-control valid" name="email"
+                                                                 type="text" value="<%=email%>">
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-2">
                                                         <div class="form-group">
                                                             <label>phone:</label>
                                                         </div>
-                                                    </div>
-                                                    <div class="col-sm-2">
+                                                    </div>                                                  
+                                                    <div class="col-sm-10">
                                                         <div class="form-group">
-                                                            <input class="form-control valid" name="phone1" id="phone1"
-                                                                type="text">
+                                                            <input class="form-control valid" name="phone"
+                                                                 type="text" value="<%=phone%>">
                                                         </div>
                                                     </div>
-                                                    <div class="col-sm-1">
-                                                        <div class="form-group">
-                                                            <h5>-</h5>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-sm-2">
-                                                        <div class="form-group">
-                                                            <input class="form-control valid" name="phone2" id="phone2"
-                                                                type="text">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-sm-1">
-                                                        <div class="form-group">
-                                                            <h5>-</h5>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-sm-2">
-                                                        <div class="form-group">
-                                                            <input class="form-control valid" name="phone3" id="phone3"
-                                                                type="text">
-                                                        </div>
-                                                    </div>
-
                                                 </div>
                                                 <div class="form-group mt-3" align="right">
-                                                    <button type="submit"
-                                                        class="button button-contactForm boxed-btn">update</button>
+                                                    <button type="submit" class="button button-contactForm boxed-btn" id="mbtn">update</button>
                                                 </div>
                                             </form>
                                         </div>
                                     </div>
                                     <div class="tab">
-                                        <input type="radio" name="tabgroup" id="tab-2">
+                                        <input type="radio" name="tabgroup" id="tab-2"  checked>
                                         <label for="tab-2">예약 정보 확인</label>
                                         <div class="tab__content">
                                             <div id="s2">
-                                                <h4>Tab heading 2</h4>
-                                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur
-                                                    odio cum eveniet
-                                                    excepturi eum provident molestias ad ipsa unde dignissimos illo
-                                                    porro animi earum
-                                                    aliquam
-                                                    perspiciatis id omnis, adipisci incidunt. Qui, beatae. Beatae animi
-                                                    totam obcaecati
-                                                    at quae,
-                                                    iste facere fuga nemo pariatur esse nihil?</p>
-                                                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloremque
-                                                    commodi eos
-                                                    voluptatem
-                                                    numquam pariatur deleniti repellat fugiat eligendi nulla molestiae
-                                                    sunt praesentium
-                                                    vero
-                                                    sequi distinctio error quibusdam maiores natus magnam, explicabo hic
-                                                    sed alias
-                                                    dolores, quis
-                                                    eum! Reprehenderit atque cupiditate dolorum? Saepe, doloribus
-                                                    veniam? Nulla!</p>
+                                                 <div class="row">
+                                                    <div class="col-4">
+                                                        <p>book1</p>                                          
+                                                    <div class="card">
+                                                      <div class="card-header">
+                                                        My Card
+                                                      </div>
+                                                      <img src="assets\img\menu_02.jpg" alt="" />
+                                                      <div class="card-body">
+                                                        <h5 class="card-title">Cost : 220,000₩</h5>
+                                                        <p class="card-text">name : sojeong</p>
+                                                        <p class="card-text">phone : 010-0000-0000</p>
+                                                        <p class="card-text">mail : abcde@naver.com</p>
+                                                        <p class="card-text">date : 2022/03/15~2022/03/17</p>
+                                                        <p class="card-text">nights: 2</p>
+                                                        <p class="card-text">room-type : Superior Single</p>
+                                                        <p class="card-text">address : 서울특별시 용산구 장문로 23</p>
+                                                      </div>
+                                                    </div>
+                                                  </div>
+                                                  <div class="col-4">
+                                                    <p>book2</p>
+
+                                                    <div class="card">
+                                                      <div class="card-header">
+                                                        My Card
+                                                      </div>
+                                                      <img src="assets\img\menu_02.jpg" alt="" />
+                                                      <div class="card-body">
+                                                        <h5 class="card-title">Cost :</h5>
+                                                        <p class="card-text">name :</p>
+                                                        <p class="card-text">phone :</p>
+                                                        <p class="card-text">mail :</p>
+                                                        <p class="card-text">date :</p>
+                                                        <p class="card-text">nights :</p>
+                                                        <p class="card-text">room-type :</p>
+                                                        <p class="card-text">address :</p>
+                                                      </div>
+                                                    </div>
+                                                  </div>
+                                                  <div class="col-4">
+                                                    <p>book3</p>
+
+                                                    <div class="card">
+                                                      <div class="card-header">
+                                                        My Card
+                                                      </div>
+                                                      <img src="assets\img\menu_02.jpg" alt="" />
+                                                      <div class="card-body">
+                                                       <h5 class="card-title">Cost :</h5>
+                                                        <p class="card-text">name :</p>
+                                                        <p class="card-text">phone :</p>
+                                                        <p class="card-text">mail :</p>
+                                                        <p class="card-text">date :</p>
+                                                        <p class="card-text">nights :</p>
+                                                        <p class="card-text">room-type :</p>
+                                                        <p class="card-text">address :</p>
+                                                      </div>
+                                                    </div>
+                                                    </div> 
+                                                    
+                                                  </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="tab">
+                                    <!-- <div class="tab">
                                         <input type="radio" name="tabgroup" id="tab-3">
                                         <label for="tab-3">결제 정보 확인</label>
                                         <div class="tab__content">
@@ -346,47 +402,172 @@
                                                 quod
                                                 fuga porro eius animi earum excepturi omnis! Reprehenderit!</p>
                                         </div>
-                                    </div>
+                                    </div> -->
                                     <div class="tab">
                                         <input type="radio" name="tabgroup" id="tab-4">
                                         <label for="tab-4">이용 후기</label>
                                         <div class="tab__content">
-                                            <h4>Tab heading 4</h4>
-                                            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Officia
-                                                exercitationem
-                                                veritatis
-                                                vero eaque. Nam totam dolorem sapiente ullam non sed nostrum praesentium
-                                                voluptatem, ad
-                                                quam
-                                                libero deserunt nemo fuga hic repudiandae veritatis cupiditate, mollitia
-                                                recusandae!</p>
+                                              <div id="s2">
+                                              <br/>
+
+                                                <div class="comment-list">
+                                                    <div class="single-comment justify-content-between d-flex">
+                                                       <div class="user justify-content-between d-flex">
+                                                          <div class="thumb">
+                                                             <img src="assets/img/comment/comment_1.png" alt="">
+                                                          </div>
+                                                          <div class="desc">
+                                                             <p class="comments">
+                                                                Multiply sea night grass fourth day sea lesser rule open subdue female fill which them
+                                                                Blessed, give fill lesser bearing multiply sea night grass fourth day sea lesser
+                                                             </p>
+                                                             <div class="d-flex justify-content-between">
+                                                                <div class="d-flex align-items-center">
+                                                                   <h5>
+                                                                      <a href="#">Emilly Blunt</a>
+                                                                   </h5>
+                                                                <!--   <p class="date">December 4, 2017 at 3:12 pm </p> --> 
+                                                                </div>
+                                                                <div class="reply-btn">
+                                                                    <a href="#" class="btn-reply text-uppercase" style="color: goldenrod;">reply</a>
+                                                                </div>
+                                                             </div>
+                                                          </div>
+                                                       </div>
+                                                    </div>
+                                                 </div>
+                                                 <div class="comment-list">
+                                                    <div class="single-comment justify-content-between d-flex">
+                                                       <div class="user justify-content-between d-flex">
+                                                          <div class="thumb">
+                                                             <img src="assets/img/comment/comment_2.png" alt="">
+                                                          </div>
+                                                          <div class="desc">
+                                                             <p class="comment">
+                                                                Multiply sea night grass fourth day sea lesser rule open subdue female fill which them
+                                                                Blessed, give fill lesser bearing multiply sea night grass fourth day sea lesser
+                                                             </p>
+                                                             <div class="d-flex justify-content-between">
+                                                                <div class="d-flex align-items-center">
+                                                                   <h5>
+                                                                      <a href="#">Emilly Blunt</a>
+                                                                   </h5>
+                                                               <!--     <p class="date">December 4, 2017 at 3:12 pm </p>-->
+                                                                </div>
+                                                                <div class="reply-btn">
+                                                                   <a href="#" class="btn-reply text-uppercase" style="color: goldenrod;">reply</a>
+                                                                </div>
+                                                             </div>
+                                                          </div>
+                                                       </div>
+                                                    </div>
+                                                 </div>
+                                                 <div class="comment-list">
+                                                    <div class="single-comment justify-content-between d-flex">
+                                                       <div class="user justify-content-between d-flex">
+                                                          <div class="thumb">
+                                                             <img src="assets/img/comment/comment_3.png" alt="">
+                                                          </div>
+                                                          <div class="desc">
+                                                             <p class="comment">
+                                                                Multiply sea night grass fourth day sea lesser rule open subdue female fill which them
+                                                                Blessed, give fill lesser bearing multiply sea night grass fourth day sea lesser
+                                                             </p>
+                                                             <div class="d-flex justify-content-between">
+                                                                <div class="d-flex align-items-center">
+                                                                   <h5>
+                                                                      <a href="#">Emilly Blunt</a>
+                                                                   </h5>
+                                                              <!--    <p class="date">December 4, 2017 at 3:12 pm </p> -->  
+                                                                </div>
+                                                                <div class="reply-btn">
+                                                                    <a href="#" class="btn-reply text-uppercase" style="color: goldenrod;">reply</a>
+                                                                </div>
+                                                             </div>
+                                                          </div>
+                                                       </div>
+                                                    </div>
+                                                    </div>
+                                                 
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="tab">
                                         <input type="radio" name="tabgroup" id="tab-5">
                                         <label for="tab-5">고객 문의</label>
                                         <div class="tab__content">
-                                            <h4>Tab heading 5</h4>
-                                            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Officia
-                                                exercitationem
-                                                veritatis
-                                                vero eaque. Nam totam dolorem sapiente ullam non sed nostrum praesentium
-                                                voluptatem, ad
-                                                quam
-                                                libero deserunt nemo fuga hic repudiandae veritatis cupiditate, mollitia
-                                                recusandae!</p>
+                                            <div class="form-group mt-3" align="center">
+                                             <div id="s2">
+													<div class="board_wrap">
+													<form class="form-contact contact_form" action="cs.jsp" method="post" novalidate="novalidate">
+													
+														<div class="board_title">
+															<h3>나의 문의 내역</h3>
+															<p>호텔 델루나는 회원님들의 문의에 신속하고 정확하게 답변드리도록 하겠습니다.</p>
+														</div>
+
+														<div class="board_list">
+															<div class="top">
+																<div class="num">번호</div>
+																<div class="title">제목</div>
+																<div class="writer">글쓴이</div>
+																<div class="date">작성일</div>
+																<div class="count">조회</div>
+															</div>
+															<div>
+																<div class="num">1</div>
+																<div class="title">
+																	<a href="#">글 제목</a>
+																</div>
+																<div class="writer">keson</div>
+																<div class="date">today</div>
+																<div class="count">3</div>
+															</div>
+															<div>
+																<div class="num">2</div>
+																<div class="title">
+																	<a href="#">글 제목</a>
+																</div>
+																<div class="writer">keson</div>
+																<div class="date">today</div>
+																<div class="count">3</div>
+															</div>
+														</div>
+
+														<div class="form-group mt-3">
+															<button type="submit"
+																class="button button-contactForm boxed-btn">글쓰기</button>
+														</div>
+
+														<nav class="blog-pagination justify-content-center d-flex">
+															<ul class="pagination">
+																<li class="page-item"><a href="#" class="page-link"
+																	aria-label="Previous"> <i class="ti-angle-left"></i>
+																</a></li>
+																<li class="page-item"><a href="#" class="page-link">1</a>
+																</li>
+																<li class="page-item active"><a href="#"
+																	class="page-link">2</a></li>
+																<li class="page-item"><a href="#" class="page-link"
+																	aria-label="Next"> <i class="ti-angle-right"></i>
+																</a></li>
+															</ul>
+														</nav>
+`													</form>
+													</div>
+												</div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-
+</div>
                     </div>
                     <div class="col-md-2">
                         <img src="assets/img/hero/profile.png" alt="" class="img-fluid">
                     </div>
-                </div>
+                
             </div>
     </section>
     <!-- ================ contact section end ================= -->
@@ -498,6 +679,9 @@
     <!-- Jquery Plugins, main Jquery -->
     <script src="./assets/js/plugins.js"></script>
     <script src="./assets/js/main.js"></script>
+      <!-- icons -->
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
     <script>
         (function ($, document) {
 

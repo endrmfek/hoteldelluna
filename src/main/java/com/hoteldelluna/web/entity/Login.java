@@ -2,6 +2,7 @@ package com.hoteldelluna.web.entity;
 
 public class Login {
 	
+	
 	private String id;
 	private String pwd;
 	private String name;

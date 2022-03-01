@@ -28,7 +28,7 @@ public class LoginCheckController extends HttpServlet{
 		response.getWriter().write(getJson(users));
 	}
 	
-	public String getJson(List<Login> list) {
+	public String getJson(List<Login> list) { //중복되는 아이디 검사하는거
 		
 		JSONArray arr = new JSONArray();
 		

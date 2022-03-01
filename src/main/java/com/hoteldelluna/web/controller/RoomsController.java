@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.hoteldelluna.web.entity.Room;
 import com.hoteldelluna.web.service.RoomService;
 
-@WebServlet("/room")
+@WebServlet("/rooms")
 public class RoomsController extends HttpServlet{
 
 	@Override
