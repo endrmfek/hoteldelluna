@@ -49,46 +49,71 @@
   </div>
   <!-- Preloader Start -->
 
-  <header>
-    <!-- Header Start -->
-    <div class="header-area header-sticky">
-      <div class="main-header ">
-        <div class="container">
-          <div class="row align-items-center">
-            <!-- logo -->
-            <div class="col-xl-2 col-lg-2">
-              <div class="logo">
-                <a href="index.html"><img src="assets/img/logo/logo1.png" width="200" height="80" alt=""></a>
-              </div>
+      <header>
+        <!-- Header Start -->
+        <div class="header-area header-sticky">
+            <div class="main-header ">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <!-- logo -->
+                        <div class="col-xl-2 col-lg-2">
+                            <div class="logo">
+                            <a href="index"><img src="assets/img/logo/logo1.png" width="180" height="70" alt=""></a>
+                            </div>
+                        </div>
+                    <div class="col-xl-8 col-lg-8">
+                            <!-- main-menu -->
+                            <div class="main-menu f-right d-none d-lg-block">
+                                <nav>
+                                    <ul id="navigation">                                                                                                                                     
+                                        <li><a href="index">Home</a></li>
+                                        <li><a href="about.html">Notice</a></li>
+                                        <li><a href="services.html">Q&A</a></li>
+                                        <c:if test="${sessionId != null }">
+											<li><a href="mypage?userNumber=${userNo}">My Page</a></li>	
+										</c:if>
+                                        
+                                        <!-- <li><a href="blog.html">Community</a>
+                                            <ul class="submenu">
+                                                <li><a href="blog.html">Blog</a></li>
+                                                <li><a href="single-blog.html">Blog Details</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="#">Pages</a>
+                                            <ul class="submenu">
+                                                <li><a href="rooms.html">Rooms</a>
+                                                <li><a href="elements.html">Element</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="contact.html">Contact</a></li> -->
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>             
+                        <div class="col-xl-2 col-lg-2">
+                            <!-- header-btn -->
+                            <div class="header-btn">
+                            	<c:if test="${sessionId == null }">
+									<a href="login" class="btn btn1 d-none d-lg-block ">Login / Sign up</a>	
+									
+								</c:if>
+								<c:if test="${sessionId != null }">
+									<a href="logout" class="btn btn1 d-none d-lg-block ">Log Out</a>
+								</c:if>
+                                
+                            </div>
+                        </div>
+                        <!-- Mobile Menu -->
+                        <div class="col-12">
+                            <div class="mobile_menu d-block d-lg-none"></div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="col-xl-8 col-lg-8">
-              <!-- main-menu -->
-              <div class="main-menu f-right d-none d-lg-block">
-                <nav>
-                  <ul id="navigation">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="about.html">Notice</a></li>
-                    <li><a href="services.html">Q&A</a></li>
-                  </ul>
-                </nav>
-              </div>
-            </div>
-            <div class="col-xl-2 col-lg-2">
-              <!-- header-btn -->
-              <div class="header-btn">
-                <a href="#" class="btn btn1 d-none d-lg-block ">Login / Join</a>
-              </div>
-            </div>
-            <!-- Mobile Menu -->
-            <div class="col-12">
-              <div class="mobile_menu d-block d-lg-none"></div>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
-    <!-- Header End -->
-  </header>
+        <!-- Header End -->
+    </header>
+
   <main>
 
     <!-- slider Area Start-->

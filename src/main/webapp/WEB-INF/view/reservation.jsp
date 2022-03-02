@@ -228,16 +228,16 @@ body, div, ul, li {
     </div>
     <!-- Preloader Start -->
 
-    <header>
+        <header>
         <!-- Header Start -->
-       <div class="header-area header-sticky">
+        <div class="header-area header-sticky">
             <div class="main-header ">
                 <div class="container">
                     <div class="row align-items-center">
                         <!-- logo -->
                         <div class="col-xl-2 col-lg-2">
                             <div class="logo">
-                               <a href="index.jsp"><img src="assets/img/logo/logo1.png" width="180" height="70" alt=""></a>
+                            <a href="index"><img src="assets/img/logo/logo1.png" width="180" height="70" alt=""></a>
                             </div>
                         </div>
                     <div class="col-xl-8 col-lg-8">
@@ -245,10 +245,14 @@ body, div, ul, li {
                             <div class="main-menu f-right d-none d-lg-block">
                                 <nav>
                                     <ul id="navigation">                                                                                                                                     
-                                        <li><a href="index.jsp">Home</a></li>
-                                        <li><a href="Notice.jsp">Notice</a></li>
-                                        <li><a href="Q&A.jsp">Q&A</a></li>
-                                     <!--    <li><a href="blog.html">Community</a>
+                                        <li><a href="index">Home</a></li>
+                                        <li><a href="about.html">Notice</a></li>
+                                        <li><a href="services.html">Q&A</a></li>
+                                        <c:if test="${sessionId != null }">
+											<li><a href="mypage?userNumber=${userNo}">My Page</a></li>	
+										</c:if>
+                                        
+                                        <!-- <li><a href="blog.html">Community</a>
                                             <ul class="submenu">
                                                 <li><a href="blog.html">Blog</a></li>
                                                 <li><a href="single-blog.html">Blog Details</a></li>
@@ -268,7 +272,14 @@ body, div, ul, li {
                         <div class="col-xl-2 col-lg-2">
                             <!-- header-btn -->
                             <div class="header-btn">
-                                <a href="#" class="btn btn1 d-none d-lg-block ">Login / Join</a>
+                            	<c:if test="${sessionId == null }">
+									<a href="login" class="btn btn1 d-none d-lg-block ">Login / Sign up</a>	
+									
+								</c:if>
+								<c:if test="${sessionId != null }">
+									<a href="logout" class="btn btn1 d-none d-lg-block ">Log Out</a>
+								</c:if>
+                                
                             </div>
                         </div>
                         <!-- Mobile Menu -->
@@ -278,9 +289,10 @@ body, div, ul, li {
                     </div>
                 </div>
             </div>
-       </div>
+    </div>
         <!-- Header End -->
     </header>
+
  <!-- slider Area Start-->
  <div class="slider-area">
     <div class="single-slider hero-overly slider-height2 d-flex align-items-center" data-background="assets/img/hero/contact_hero.jpg" >
@@ -298,6 +310,9 @@ body, div, ul, li {
 </div>
 <!-- slider Area End-->
 	<c:set var="r" value="${room}"/>
+	<c:if test="${not empty sessionId}">
+		<c:set var="u" value="${users}"/>
+	</c:if>
 	<!-- ================ contact section start ================= -->
 	<section class="contact-section">
 		<div class="container">
@@ -316,14 +331,15 @@ body, div, ul, li {
 								<div class="col-lg-8">
 									<form class="form-contact contact_form" action="reservationOk"
 										method="post" name="wfrm" novalidate="novalidate">
-										<%-- <input type="hidden" name="userNumber" value="${param.userNumber} }"/>
-										<input type="hidden" name="roomNumber" value="${param.roomNumber} }"/>
-										<input type="hidden" name="checkin" value="${param.datepicker1} }"/>
+										<input type="hidden" name="userNumber" value="${u.no}"/>
+										<input type="hidden" name="roomNumber" value="${r.r_no}"/>
+										<input type="hidden" name="checkin" value="${param.datepicker1}"/>
 										<input type="hidden" name="checkout" value="${param.datepicker2}"/>
 										<input type="hidden" name="adult" value="${param.adult}"/>
-										<input type="hidden" name="child" value="${param.child }"/>
-										<input type="hidden" name="totalprice" value="${totalprice }"/>
-										<input type="hidden" name="nights" value="${nights }"/> --%>
+										<input type="hidden" name="child" value="${param.child}"/>
+										<input type="hidden" name="totalprice" value="${totalprice}"/>
+										<input type="hidden" name="nights" value="${nights}"/>
+										<input type="hidden" name="room" value="${r.r_roomtype}"/>
 																				
 										<div class="row">
 											<div class="col-sm-2">

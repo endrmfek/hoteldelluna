@@ -3,36 +3,7 @@
 <%@page import="com.hoteldelluna.web.entity.Users"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="javax.naming.Context" %>
-<%@page import="javax.naming.InitialContext" %>
-<%@ page import="javax.naming.NamingException" %>
- 
-<%@page import="javax.sql.DataSource" %>
-<%@page import="java.sql.DriverManager" %>
-<%@page import="java.sql.Connection" %>
-<%@page import="java.sql.PreparedStatement" %>
-<%@page import="java.sql.ResultSet" %>
-<%@page import="java.sql.SQLException" %>
-<%
-	request.setCharacterEncoding("utf-8");
-	//int userNumber=Integer.parseInt(request.getParameter("userNumber"));
-	int userNumber=100;
-
-	Users to = new Users();
-	to.setU_no(1);
-	
-	UsersService dao=new UsersService(); 
-	to=dao.mypage(to);
-	
-	String userID=to.getU_id();
-	String userName=to.getU_name();
-	String pwd=to.getU_pwd();
-	String email=to.getU_email();
-	String phone=to.getU_phone();
-	String birth=to.getU_birth();
-
-	
-%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!doctype html>
 <html class="no-js" lang="zxx">
 <head>
@@ -153,7 +124,7 @@
     </div>
     <!-- Preloader Start -->
 
-    <header>
+        <header>
         <!-- Header Start -->
         <div class="header-area header-sticky">
             <div class="main-header ">
@@ -162,19 +133,22 @@
                         <!-- logo -->
                         <div class="col-xl-2 col-lg-2">
                             <div class="logo">
-                                <a href="index.jsp"><img src="assets/img/logo/logo1.png" width="180" height="70"
-                                        alt=""></a>
+                            <a href="index"><img src="assets/img/logo/logo1.png" width="180" height="70" alt=""></a>
                             </div>
                         </div>
-                        <div class="col-xl-8 col-lg-8">
+                    <div class="col-xl-8 col-lg-8">
                             <!-- main-menu -->
                             <div class="main-menu f-right d-none d-lg-block">
                                 <nav>
-                                    <ul id="navigation">
-                                        <li><a href="index.jsp">Home</a></li>
-                                        <li><a href="Notice.jsp">Notice</a></li>
-                                        <li><a href="Q&A.jsp">Q&A</a></li>
-                                        <!--    <li><a href="blog.html">Community</a>
+                                    <ul id="navigation">                                                                                                                                     
+                                        <li><a href="index">Home</a></li>
+                                        <li><a href="about.html">Notice</a></li>
+                                        <li><a href="services.html">Q&A</a></li>
+                                        <c:if test="${sessionId != null }">
+											<li><a href="mypage?userNumber=${userNo}">My Page</a></li>	
+										</c:if>
+                                        
+                                        <!-- <li><a href="blog.html">Community</a>
                                             <ul class="submenu">
                                                 <li><a href="blog.html">Blog</a></li>
                                                 <li><a href="single-blog.html">Blog Details</a></li>
@@ -190,11 +164,18 @@
                                     </ul>
                                 </nav>
                             </div>
-                        </div>
+                        </div>             
                         <div class="col-xl-2 col-lg-2">
                             <!-- header-btn -->
                             <div class="header-btn">
-                                <a href="#" class="btn btn1 d-none d-lg-block ">Login / Join</a>
+                            	<c:if test="${sessionId == null }">
+									<a href="login" class="btn btn1 d-none d-lg-block ">Login / Sign up</a>	
+									
+								</c:if>
+								<c:if test="${sessionId != null }">
+									<a href="logout" class="btn btn1 d-none d-lg-block ">Log Out</a>
+								</c:if>
+                                
                             </div>
                         </div>
                         <!-- Mobile Menu -->
@@ -204,9 +185,10 @@
                     </div>
                 </div>
             </div>
-        </div>
+    </div>
         <!-- Header End -->
     </header>
+
     <!-- slider Area Start-->
     <div class="slider-area">
         <div class="single-slider hero-overly slider-height2 d-flex align-items-center"
@@ -226,6 +208,7 @@
     <!-- slider Area End-->
 
     <!-- ================ contact section start ================= -->
+    <c:set var="u" value="${users}"/>
     <section class="contact-section">
         <div class="container">
             <div class="section-top-border text-left">
@@ -241,7 +224,7 @@
                                     <div class="tab__content">
                                         <div id="s2">
                                             <form class="form-contact contact_form" action="mypage_ok.jsp" method="post" id="mfrm" novalidate="novalidate">
-                                                <input type="hidden" name="userNumber" value="<%=userNumber %>"/>                                               
+                                                <input type="hidden" name="userNumber" value="${u.no }"/>                                               
                                               
                                                 <div class="row">
                                                     <div class="col-sm-2">
@@ -252,7 +235,7 @@
                                                     <div class="col-sm-10">
                                                         <div class="form-group">
                                                             <input class="form-control valid" name="userID" 
-                                                                type="text" value="<%=userID %>" readonly>
+                                                                type="text" value="${u.id}" readonly>
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-2">
@@ -264,7 +247,7 @@
                                                     <div class="col-sm-10">
                                                         <div class="form-group">
                                                             <input class="form-control valid" name="userName" 
-                                                                type="text" value="<%=userName %>" readonly>
+                                                                type="text" value="${u.name}" readonly>
                                                         </div>
                                                     </div>
                                                     
@@ -286,7 +269,7 @@
                                                     <div class="col-sm-10">
                                                         <div class="form-group">
                                                             <input class="form-control valid" name="birth"
-                                                                 type="text" value="<%=birth%>">
+                                                                 type="text" value="${u.birth }">
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-2">
@@ -297,7 +280,7 @@
                                                     <div class="col-sm-10">
                                                         <div class="form-group">
                                                             <input class="form-control valid" name="email"
-                                                                 type="text" value="<%=email%>">
+                                                                 type="text" value="${u.email }">
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-2">
@@ -308,7 +291,7 @@
                                                     <div class="col-sm-10">
                                                         <div class="form-group">
                                                             <input class="form-control valid" name="phone"
-                                                                 type="text" value="<%=phone%>">
+                                                                 type="text" value="${u.phone }">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -324,65 +307,28 @@
                                         <div class="tab__content">
                                             <div id="s2">
                                                  <div class="row">
+                                                 	<c:forEach var="b" items="${bookings}">
                                                     <div class="col-4">
-                                                        <p>book1</p>                                          
+                                                        <p>book ${b.b_no}</p>                                          
                                                     <div class="card">
                                                       <div class="card-header">
                                                         My Card
                                                       </div>
                                                       <img src="assets\img\menu_02.jpg" alt="" />
                                                       <div class="card-body">
-                                                        <h5 class="card-title">Cost : 220,000₩</h5>
-                                                        <p class="card-text">name : sojeong</p>
-                                                        <p class="card-text">phone : 010-0000-0000</p>
-                                                        <p class="card-text">mail : abcde@naver.com</p>
-                                                        <p class="card-text">date : 2022/03/15~2022/03/17</p>
-                                                        <p class="card-text">nights: 2</p>
-                                                        <p class="card-text">room-type : Superior Single</p>
+                                                        <h5 class="card-title">Cost : ${b.b_ttlprice}₩</h5>
+                                                        <p class="card-text">name : ${b.b_name }</p>
+                                                        <p class="card-text">phone : ${b.b_phone }</p>
+                                                        <p class="card-text">mail : ${b.b_email }</p>
+                                                        <p class="card-text">date : ${b.b_chkin} ~ ${b.b_chkout}</p>
+                                                        <p class="card-text">nights: ${b.b_nights}</p>
+                                                        <p class="card-text">room-type : ${b.b_room}</p>
                                                         <p class="card-text">address : 서울특별시 용산구 장문로 23</p>
                                                       </div>
                                                     </div>
                                                   </div>
-                                                  <div class="col-4">
-                                                    <p>book2</p>
-
-                                                    <div class="card">
-                                                      <div class="card-header">
-                                                        My Card
-                                                      </div>
-                                                      <img src="assets\img\menu_02.jpg" alt="" />
-                                                      <div class="card-body">
-                                                        <h5 class="card-title">Cost :</h5>
-                                                        <p class="card-text">name :</p>
-                                                        <p class="card-text">phone :</p>
-                                                        <p class="card-text">mail :</p>
-                                                        <p class="card-text">date :</p>
-                                                        <p class="card-text">nights :</p>
-                                                        <p class="card-text">room-type :</p>
-                                                        <p class="card-text">address :</p>
-                                                      </div>
-                                                    </div>
-                                                  </div>
-                                                  <div class="col-4">
-                                                    <p>book3</p>
-
-                                                    <div class="card">
-                                                      <div class="card-header">
-                                                        My Card
-                                                      </div>
-                                                      <img src="assets\img\menu_02.jpg" alt="" />
-                                                      <div class="card-body">
-                                                       <h5 class="card-title">Cost :</h5>
-                                                        <p class="card-text">name :</p>
-                                                        <p class="card-text">phone :</p>
-                                                        <p class="card-text">mail :</p>
-                                                        <p class="card-text">date :</p>
-                                                        <p class="card-text">nights :</p>
-                                                        <p class="card-text">room-type :</p>
-                                                        <p class="card-text">address :</p>
-                                                      </div>
-                                                    </div>
-                                                    </div> 
+                                                  </c:forEach>
+                                                   
                                                     
                                                   </div>
                                             </div>

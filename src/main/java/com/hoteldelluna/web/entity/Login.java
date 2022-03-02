@@ -2,7 +2,7 @@ package com.hoteldelluna.web.entity;
 
 public class Login {
 	
-	
+	private int no;
 	private String id;
 	private String pwd;
 	private String name;
@@ -14,11 +14,13 @@ public class Login {
 	
 	public Login() {}
 	
-	
 
-	public Login(String id, String pwd, String name, String birth, String gender, String email,
-			String phone, String date ) {
+
+	
+	public Login(int no, String id, String pwd, String name, String birth, String gender, String email, String phone,
+			String date) {
 		super();
+		this.no = no;
 		this.id = id;
 		this.pwd = pwd;
 		this.name = name;
@@ -29,6 +31,22 @@ public class Login {
 		this.date = date;
 	}
 
+
+
+
+
+
+
+
+	public int getNo() {
+		return no;
+	}
+
+
+
+	public void setNo(int no) {
+		this.no = no;
+	}
 
 
 	public String getId() {
@@ -127,11 +145,15 @@ public class Login {
 
 
 
+
 	@Override
 	public String toString() {
-		return "Login [id=" + id + ", pwd=" + pwd + ", name=" + name + ", birth=" + birth + ", gender=" + gender
-				+ ", email=" + email + ", phone=" + phone + ", date=" + date + "]";
+		return "Login [no=" + no + ", id=" + id + ", pwd=" + pwd + ", name=" + name + ", birth=" + birth + ", gender="
+				+ gender + ", email=" + email + ", phone=" + phone + ", date=" + date + "]";
 	}
+
+
+
 
 
 

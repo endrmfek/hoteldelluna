@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.hoteldelluna.web.entity.Login;
 import com.hoteldelluna.web.service.KakaoApi;
 import com.hoteldelluna.web.service.LoginService;
 
@@ -29,9 +30,13 @@ public class LoginController extends HttpServlet{
 			KakaoApi kakao = new KakaoApi();
 			String access_code = kakao.getAccessCode(code);
 			String id = kakao.getUserInfo(access_code);
+			LoginService service = new LoginService();
+			Login user = service.getLogin(id);
+			int userNo = user.getNo();
+			
 			if(id != null) {
 				session.setAttribute("sessionId", id);
-				
+				session.setAttribute("userNo", userNo);
 			}
 			
 			PrintWriter out = response.getWriter(); 
@@ -61,10 +66,14 @@ public class LoginController extends HttpServlet{
 		boolean logincheck = service.LoginCheck(id, password);
 		
 		
+		Login user = service.getLogin(id);
+		int userNo = user.getNo();
+		
 		if (logincheck) {
 			request.setAttribute("logincheck", logincheck);
 			HttpSession session =request.getSession();
 			session.setAttribute("sessionId", id);
+			session.setAttribute("userNo", userNo);
 			
 			PrintWriter out = response.getWriter(); 
 			out.println("<script>alert('환영합니다 "+id+"님'); location.href='index';</script>"); 

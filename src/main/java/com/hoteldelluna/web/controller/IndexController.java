@@ -19,7 +19,7 @@ public class IndexController extends HttpServlet{
 		HttpSession session = request.getSession();
 		//System.out.println(session.getAttribute("sessionId"));
 		session.getAttribute("sessionId");
-		
+		session.getAttribute("userNo");
 		//kakaoLogin
 //		String code = request.getParameter("code");
 //		if(code != null) {

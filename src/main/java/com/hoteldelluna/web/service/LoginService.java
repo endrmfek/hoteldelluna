@@ -168,6 +168,7 @@ public class LoginService {
 			ResultSet rs = st.executeQuery(sql);
 
 			while (rs.next()) {
+				int no = rs.getInt("u_no");
 				String id = rs.getString("u_id");
 				String pwd = rs.getString("u_pwd");
 				String name = rs.getString("u_name");
@@ -178,7 +179,7 @@ public class LoginService {
 				String date = rs.getString("u_date");
 
 
-				Login login = new Login(id, pwd, name, birth, gender, email, phone, date);
+				Login login = new Login(no, id, pwd, name, birth, gender, email, phone, date);
 				list.add(login);
 				
 			}
@@ -193,9 +194,50 @@ public class LoginService {
 			e.printStackTrace();
 		} 
 		
-		
-	
 		return list;
+	}
+	
+	public Login getLogin(String u_id) {
+
+		
+		String sql = "SELECT * FROM users where u_id=?";
+		String url = "jdbc:oracle:thin:@localhost:1521/orclpdb";
+		Login login = null;
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+			Connection con = dataSource.getConnection();
+			PreparedStatement st = con.prepareStatement(sql);
+			st.setString(1, u_id);
+			ResultSet rs = st.executeQuery();
+
+			if (rs.next()) {
+				int no = rs.getInt("u_no");
+				String id = rs.getString("u_id");
+				String pwd = rs.getString("u_pwd");
+				String name = rs.getString("u_name");
+				String birth = rs.getString("u_birth");
+				String gender = rs.getString("u_gender");
+				String email = rs.getString("u_email");
+				String phone = rs.getString("u_phone");
+				String date = rs.getString("u_date");
+
+
+				login = new Login(no, id, pwd, name, birth, gender, email, phone, date);
+				
+				
+			}
+			rs.close();
+			st.close();
+			con.close();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		
+		return login;
 	}
 
 	public void deleteLogin(String[] delIds) {

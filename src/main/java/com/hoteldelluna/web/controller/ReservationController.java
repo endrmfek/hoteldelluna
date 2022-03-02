@@ -12,7 +12,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.hoteldelluna.web.entity.Login;
 import com.hoteldelluna.web.entity.Room;
+import com.hoteldelluna.web.service.LoginService;
 import com.hoteldelluna.web.service.RoomService;
 
 @WebServlet("/reservation")
@@ -30,14 +32,20 @@ public class ReservationController extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		String id = (String)session.getAttribute("sessionId");
+		String u_id = (String)session.getAttribute("sessionId");
 		
-		if( id != null) {
+		if( u_id != null) {
 			int roomNo=Integer.parseInt(request.getParameter("roomNo").trim());
 			
-			RoomService roomService = new RoomService();
+			RoomService roomService = new RoomService(); // 룸 정보
 			Room room = roomService.foundRoom(roomNo);
 			request.setAttribute("room", room);
+			
+			LoginService loginService = new LoginService(); //id로 정보 찾아라.
+			Login login = loginService.getLogin(u_id);
+			request.setAttribute("users", login);
+			System.out.println(login);
+			
 			
 			Date format1;
 			Date format2;
@@ -52,6 +60,7 @@ public class ReservationController extends HttpServlet{
 				int totalprice = nights * price;
 				request.setAttribute("totalprice", totalprice);
 				request.setAttribute("nights", nights);
+				
 			} catch (ParseException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

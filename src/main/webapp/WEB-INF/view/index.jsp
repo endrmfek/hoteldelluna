@@ -27,6 +27,33 @@
             <link rel="stylesheet" href="assets/css/style.css">
             <link rel="stylesheet" href="assets/css/responsive.css">
             
+            
+        <script type="text/javascript">
+        window.onload = function() {
+        	document.getElementById("submit").onclick = function() {
+        		if(document.getElementById("datepicker1").value == '') {
+        			alert("please select your check-in date");
+        			return false
+        		}
+        		
+        		if(document.getElementById("datepicker2").value == '') {
+        			alert("please select your check-out date");
+        			return false;
+        		}
+        		
+        		
+        		if(document.getElementById("select2").options[document.getElementById("select2").selectedIndex].value == '0' &&
+        				document.getElementById("select3").options[document.getElementById("select3").selectedIndex].value =='0') {
+            		alert('How many People ?');
+            		return false;
+            	}
+        		
+        	}
+        	
+        }
+        	
+        	
+        </script>
 </head>
 
 <body>
@@ -65,7 +92,7 @@
                         <!-- logo -->
                         <div class="col-xl-2 col-lg-2">
                             <div class="logo">
-                            <a href="index.html"><img src="assets/img/logo/logo1.png" width="180" height="70" alt=""></a>
+                            <a href="index"><img src="assets/img/logo/logo1.png" width="180" height="70" alt=""></a>
                             </div>
                         </div>
                     <div class="col-xl-8 col-lg-8">
@@ -73,11 +100,11 @@
                             <div class="main-menu f-right d-none d-lg-block">
                                 <nav>
                                     <ul id="navigation">                                                                                                                                     
-                                        <li><a href="index.html">Home</a></li>
+                                        <li><a href="index">Home</a></li>
                                         <li><a href="about.html">Notice</a></li>
                                         <li><a href="services.html">Q&A</a></li>
                                         <c:if test="${sessionId != null }">
-											<li><a href="mypage.jsp">My Page</a></li>	
+											<li><a href="logout">Logout</a></li>	
 										</c:if>
                                         
                                         <!-- <li><a href="blog.html">Community</a>
@@ -105,7 +132,7 @@
 									
 								</c:if>
 								<c:if test="${sessionId != null }">
-									<a href="logout" class="btn btn1 d-none d-lg-block ">Log Out</a>
+									<a href="mypage?userNumber=${userNo}" class="btn btn1 d-none d-lg-block ">My Page</a>
 								</c:if>
                                 
                             </div>
@@ -185,8 +212,8 @@
                             <form action="#">
                                 <div class="select-itms">
                                     <select name="select" id="select1">
-                                        <option value="">Seoul</option>
-                                        <option value="">Incheon</option>
+                                        <option value="s">Seoul</option>
+                                        <option value="i">Incheon</option>
                                         <option value="">경기</option>
                                         <option value="">충청</option>
                                         <option value="">전라</option>
@@ -206,7 +233,7 @@
                             <span> Check In Date:</span>
                         </div>
                         <div class="boking-datepicker">
-                            <input id="datepicker1"  placeholder="2022/02/20" />
+                            <input id="datepicker1"  placeholder="03/01/2022" />
                         </div>
                 </div>
                     <!-- Single Select Box -->
@@ -216,7 +243,7 @@
                             <span>Check OutDate:</span>
                         </div>
                         <div class="boking-datepicker">
-                            <input id="datepicker2"  placeholder="2022/02/22" />
+                            <input id="datepicker2"  placeholder="03/02/2022" />
                         </div>
                 </div>
                     <!-- Single Select Box -->
@@ -227,12 +254,12 @@
                         <div class="select-this">
                             <form action="#">
                                 <div class="select-itms">
-                                    <select name="select" id="select1">
-                                    	<option value="">0</option>
-                                        <option value="">1</option>
-                                        <option value="">2</option>
-                                        <option value="">3</option>
-                                        <option value="">4</option>
+                                    <select name="select" id="select2">
+                                    	<option value="0">0</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
                                     </select>
                                 </div>
                             </form>
@@ -246,12 +273,12 @@
                         <div class="select-this">
                             <form action="#">
                                 <div class="select-itms">
-                                    <select name="select" id="select2">
-                                    	<option value="">0</option>
-                                        <option value="">1</option>
-                                        <option value="">2</option>
-                                        <option value="">3</option>
-                                        <option value="">4</option>
+                                    <select name="select" id="select3">
+                                    	<option value="0">0</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
                                     </select>
                                 </div>
                             </form>
@@ -277,7 +304,7 @@
                 	</div> -->
                     <!-- Single Select Box -->
                     <div class="single-select-box pt-45 mb-30">
-                        <a href="rooms.html" class="btn select-btn">Book Now</a>
+                        <a href="rooms" class="btn select-btn" id="submit">Book Now</a>
                 </div>
                 </div>
             </form>

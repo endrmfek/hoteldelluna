@@ -20,7 +20,14 @@ public class Booking {
 	private String b_chkin;
 	private String b_chkout;
 	private int b_nights;
+	private String b_room;
 	
+	public String getB_room() {
+		return b_room;
+	}
+	public void setB_room(String b_room) {
+		this.b_room = b_room;
+	}
 	public int getB_no() {
 		return b_no;
 	}
