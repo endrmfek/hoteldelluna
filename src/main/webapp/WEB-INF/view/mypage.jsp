@@ -359,93 +359,44 @@
                                                 <div class="comment-list">
                                                     <div class="single-comment justify-content-between d-flex">
                                                        <div class="user justify-content-between d-flex">
-                                                          <div class="thumb">
+                                                          <div class="thumb" style="padding-right:20px;">
                                                              <img src="assets/img/comment/comment_1.png" alt="">
                                                           </div>
                                                           <div class="desc">
                                                              <p class="comments">
-                                                                Multiply sea night grass fourth day sea lesser rule open subdue female fill which them
-                                                                Blessed, give fill lesser bearing multiply sea night grass fourth day sea lesser
+                                                                즐거운 시간 보내고 갑니다. 감사합니다!
                                                              </p>
                                                              <div class="d-flex justify-content-between">
                                                                 <div class="d-flex align-items-center">
                                                                    <h5>
-                                                                      <a href="#">Emilly Blunt</a>
+                                                                      <a href="#">${u.name}</a>
                                                                    </h5>
                                                                 <!--   <p class="date">December 4, 2017 at 3:12 pm </p> --> 
                                                                 </div>
-                                                                <div class="reply-btn">
+                                                                <!-- <div class="reply-btn">
                                                                     <a href="#" class="btn-reply text-uppercase" style="color: goldenrod;">reply</a>
-                                                                </div>
+                                                                </div> -->
                                                              </div>
                                                           </div>
                                                        </div>
                                                     </div>
                                                  </div>
-                                                 <div class="comment-list">
-                                                    <div class="single-comment justify-content-between d-flex">
-                                                       <div class="user justify-content-between d-flex">
-                                                          <div class="thumb">
-                                                             <img src="assets/img/comment/comment_2.png" alt="">
-                                                          </div>
-                                                          <div class="desc">
-                                                             <p class="comment">
-                                                                Multiply sea night grass fourth day sea lesser rule open subdue female fill which them
-                                                                Blessed, give fill lesser bearing multiply sea night grass fourth day sea lesser
-                                                             </p>
-                                                             <div class="d-flex justify-content-between">
-                                                                <div class="d-flex align-items-center">
-                                                                   <h5>
-                                                                      <a href="#">Emilly Blunt</a>
-                                                                   </h5>
-                                                               <!--     <p class="date">December 4, 2017 at 3:12 pm </p>-->
-                                                                </div>
-                                                                <div class="reply-btn">
-                                                                   <a href="#" class="btn-reply text-uppercase" style="color: goldenrod;">reply</a>
-                                                                </div>
-                                                             </div>
-                                                          </div>
-                                                       </div>
-                                                    </div>
-                                                 </div>
-                                                 <div class="comment-list">
-                                                    <div class="single-comment justify-content-between d-flex">
-                                                       <div class="user justify-content-between d-flex">
-                                                          <div class="thumb">
-                                                             <img src="assets/img/comment/comment_3.png" alt="">
-                                                          </div>
-                                                          <div class="desc">
-                                                             <p class="comment">
-                                                                Multiply sea night grass fourth day sea lesser rule open subdue female fill which them
-                                                                Blessed, give fill lesser bearing multiply sea night grass fourth day sea lesser
-                                                             </p>
-                                                             <div class="d-flex justify-content-between">
-                                                                <div class="d-flex align-items-center">
-                                                                   <h5>
-                                                                      <a href="#">Emilly Blunt</a>
-                                                                   </h5>
-                                                              <!--    <p class="date">December 4, 2017 at 3:12 pm </p> -->  
-                                                                </div>
-                                                                <div class="reply-btn">
-                                                                    <a href="#" class="btn-reply text-uppercase" style="color: goldenrod;">reply</a>
-                                                                </div>
-                                                             </div>
-                                                          </div>
-                                                       </div>
-                                                    </div>
-                                                    </div>
+                                                 
                                                  
                                             </div>
                                         </div>
                                     </div>
+                                    
+                                    
                                     <div class="tab">
                                         <input type="radio" name="tabgroup" id="tab-5">
                                         <label for="tab-5">고객 문의</label>
                                         <div class="tab__content">
                                             <div class="form-group mt-3" align="center">
-                                             <div id="s2">
-													<div class="board_wrap">
-													<form class="form-contact contact_form" action="cs.jsp" method="post" novalidate="novalidate">
+                                             <div id="s2" >
+                                             
+													<div class="board_wrap" >
+													<form class="form-contact contact_form" action="csboardWrite" method="get" novalidate="novalidate">
 													
 														<div class="board_title">
 															<h3>나의 문의 내역</h3>
@@ -460,24 +411,18 @@
 																<div class="date">작성일</div>
 																<div class="count">조회</div>
 															</div>
+															<c:forEach var="b" items="${board}">
 															<div>
-																<div class="num">1</div>
+																<div class="num">${b.c_no }</div>
 																<div class="title">
-																	<a href="#">글 제목</a>
+																	<a href="#">${b.c_subject }</a>
 																</div>
-																<div class="writer">keson</div>
-																<div class="date">today</div>
-																<div class="count">3</div>
+																<div class="writer">${b.c_name }</div>
+																<div class="date">${b.c_wdate }</div>
+																<div class="count">${b.c_hit }</div>
 															</div>
-															<div>
-																<div class="num">2</div>
-																<div class="title">
-																	<a href="#">글 제목</a>
-																</div>
-																<div class="writer">keson</div>
-																<div class="date">today</div>
-																<div class="count">3</div>
-															</div>
+															</c:forEach>
+															
 														</div>
 
 														<div class="form-group mt-3">
@@ -501,6 +446,7 @@
 														</nav>
 `													</form>
 													</div>
+													
 												</div>
                                         </div>
                                     </div>

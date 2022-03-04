@@ -1,6 +1,7 @@
 package com.hoteldelluna.web.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -11,8 +12,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.hoteldelluna.web.entity.Booking;
+import com.hoteldelluna.web.entity.CSBoard;
 import com.hoteldelluna.web.entity.Login;
 import com.hoteldelluna.web.service.BookingService;
+import com.hoteldelluna.web.service.CSBoardService;
 import com.hoteldelluna.web.service.LoginService;
 
 @WebServlet("/mypage")
@@ -30,6 +33,10 @@ public class MypageController extends HttpServlet{
 		LoginService loginService = new LoginService();
 		Login users = loginService.getLogin((String)session.getAttribute("sessionId"));
 		request.setAttribute("users", users);
+		
+		CSBoardService boardService = new CSBoardService();
+		ArrayList<CSBoard> board = boardService.csboardList();
+		request.setAttribute("board", board);
 		
 		request.getRequestDispatcher("/WEB-INF/view/mypage.jsp").forward(request, response);
 	}

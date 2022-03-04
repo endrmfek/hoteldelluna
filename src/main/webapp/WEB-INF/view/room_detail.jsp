@@ -29,7 +29,6 @@
       <link rel="stylesheet" href="assets/css/responsive.css" />
       <link rel="stylesheet" href="assets/css/reserve_style.css" />
       
-      
    </head>
 
    <body>
@@ -151,10 +150,10 @@
                   <h2>${r.r_roomtype}</h2>
                   <ul class="blog-info-link mt-3 mb-4">
                      <li>
-                     <a href="#"><i class="fa fa-user"></i> 최대인원 2명 침실 1개 침대 1개 욕실 1개</a>
+                     <a href="#"><i class="fa fa-user"></i> 최대인원 ${r.r_occupancy + 1}명 </a>
                      </li>
                      <li>
-                     <a href="#commen"><i class="fa fa-comments"></i> 03 Comments</a>
+                     <a href="#commen" ><i class="fa fa-comments"></i> <span id="comments">comments</span></a>
                      </li>
                      <li>
                         <a href="#commen"><i class="fa fa-star"></i> ${r.r_star} </a>
@@ -163,28 +162,52 @@
                   <hr>
 
                   <p class="excert">
-                     인천 파라다이스 호텔입니다.~~
+                     The ${r.r_roomtype} Rooms at Hotel Del Luna are larger than standard rooms at most 5-star hotels.<br> 
+                     They are kept in top condition through frequent renovations. <br>
+                     Each ${r.r_roomtype } Room features a large desk that allows guests to comfortably and easily conduct business while traveling. 
+                     Whether your trip is for business or for pleasure, enjoy the hotel experience of a lifetime in a ${r.r_roomtype} Room overlooking beautiful downtown Seoul.
+
+
                   </p>
-                  <p>
-                     어메니티 없습니다~
-                  </p>
+                  
                   <div class="quote-wrapper">
                      <div class="quotes">
-                     "정말 대단한 호텔이에요!"
+                     <h2>Overview</h2>
+                     <b>Bed type</b>&emsp;&emsp;${r.r_bedtype}&emsp;&emsp;<br>
+                     <b>Occupancy</b>&emsp;&emsp;${r.r_occupancy } persons<br>
+                     <b>View</b>&emsp;&emsp;City&emsp;&emsp;<br>
+                     <b>Check-in / Check-out</b>&emsp;&emsp;14:00 / 12:00
                      </div>
                   </div>
-                  <p>
-                     하하하하하하하ㅏㅎ 빨리완~
+                  
+                  <h2>Amenities</h2>
+                  <p class="excert">
+                     
+                     <b>General</b><br>
+					Flashlight / Slippers / Shoe horn / Shoe polish / Teapot Safe <br>
+					Refrigerator / Large closet / Mini Bar / Fire extinguisher / 32'' LCD TV
                   </p>
-                  <p>
-                     강추강추~
+                  
+                  <p class="excert">
+                     
+                     <b>Bathroom</b><br>
+					Disposable toothbrushes and toothpaste / Sponge / Bathrobe <br> 
+					Bidet / Hair dryer / Bathtub Sanitary / bag Bathroom amenities / Cotton swabs
                   </p>
+                  
+                  <p class="excert">
+                     
+                     <b>Others</b><br>
+					Cable&Satellite TV channels / Two bottles of complimentary mineral water <br> 
+					daily Voicemail Service / Complimentary tea service
+                  </p>
+                  
                </div>
                </div>
                <div class="navigation-top">
                <div class="d-sm-flex justify-content-between text-center">
                   <p class="like-info">
-                     <span class="align-middle"><i class="fa fa-heart"></i></span> 민수 외 5명이 좋아합니다
+                     <span class="align-middle"><i class="fa fa-heart"></i></span> minsoo and 5 people like it
                   </p>
                   <div class="col-sm-4 text-center my-2 my-sm-0">
                      <!-- <p class="comment-count"><span class="align-middle"><i class="fa fa-comment"></i></span> 06 Comments</p> -->
@@ -204,7 +227,7 @@
                      </li>
                   </ul>
                </div>
-               <div class="navigation-area">
+               <!-- <div class="navigation-area">
                   <div class="row">
                      <div class="col-lg-6 col-md-6 col-12 nav-left flex-row d-flex justify-content-start align-items-center">
                      <div class="thumb">
@@ -243,7 +266,7 @@
                      </div>
                      </div>
                   </div>
-               </div>
+               </div> -->
                </div>
                <div class="blog-author">
                <div class="media align-items-center">
@@ -252,7 +275,7 @@
                      <a href="#">
                      <h4>매니저 강민수</h4>
                      </a>
-                     <p>너 우리호텔 안오면 큰일난다 알겠어?</p>
+                     <p>항상 최고의 서비스를 제공하는 호텔델루나가 되겠습니다.</p>
                   </div>
                </div>
                </div>
@@ -336,7 +359,7 @@
                   </div>
                </div> -->
                
-               <div id="disqus_thread"></div>
+               <!-- <div id="disqus_thread"></div>
 				<script>
 				    /**
 				    *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
@@ -355,7 +378,22 @@
 				    })();
 				</script>
 				<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+				 -->
+				 
+				<script src="https://utteranc.es/client.js"
+				        repo="endrmfek/hoteldelluna"
+				        issue-term="url"
+				        label="endrmfek/hoteldelluna"
+				        theme="photon-dark"
+				        crossorigin="anonymous"
+				        name="utterances"
+				        async>
+				</script>
+				
+				
                </div>
+               
+               
                <!-- <div class="comment-form">
                <h4>Leave a Reply</h4>
                <form class="form-contact comment_form" action="#" id="commentForm">
@@ -790,5 +828,14 @@
          format: 'HH.MM',
          });
       </script>
+      
+      <!-- <script type="text/javascript">
+      
+      window.addEventListener('DOMContentLoaded', function(){ 
+    	  document.getElementById('comments').innerText = document.getElementsByClassName('text-link')[0].text.substring(0,1); 
+    	});
+
+      
+      </script> -->
    </body>
    </html>

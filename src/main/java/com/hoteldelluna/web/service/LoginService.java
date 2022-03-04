@@ -224,7 +224,7 @@ public class LoginService {
 
 				login = new Login(no, id, pwd, name, birth, gender, email, phone, date);
 				
-				
+				System.out.println(login.toString());
 			}
 			rs.close();
 			st.close();

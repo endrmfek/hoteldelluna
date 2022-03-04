@@ -4345,10 +4345,12 @@ label {
   padding: 15px;
   line-height: 1.733;
   color: #888888;
-  font-style: italic;
+  
   margin-top: 25px;
   margin-bottom: 25px;
 }
+
+
 @media (min-width: 768px) {
   .single-post-area .quote-wrapper {
     padding: 30px;
@@ -4359,6 +4361,11 @@ label {
   background: #fff;
   padding: 15px 15px 15px 20px;
   border-left: 2px solid;
+  font-size:18px;
+}
+
+.single-post-area .quotes b {
+	font-weight:500;
 }
 @media (min-width: 768px) {
   .single-post-area .quotes {

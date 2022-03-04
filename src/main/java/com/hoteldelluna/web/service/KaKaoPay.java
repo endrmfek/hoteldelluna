@@ -16,7 +16,7 @@ public class KaKaoPay {
 	
 	private static final String appKey = "083f876c1ff43b8b6dc11eaea2c1678b";
 	
-	public String kakaoPayReady(String roomtype , String totalprice) {
+	public String kakaoPayReady(String roomtype , String totalprice, int userNo) {
 		String reqUrl = "https://kapi.kakao.com/v1/payment/ready";
 		String nextUrl = "";
 		try {
@@ -36,9 +36,9 @@ public class KaKaoPay {
 			sb.append("&quantity=1");
 			sb.append("&total_amount="+totalprice+"");
 			sb.append("&tax_free_amount=100");
-			sb.append("&approval_url=http://www.localhost:8080/HotelDelLuna/index");
+			sb.append("&approval_url=http://www.localhost:8080/HotelDelLuna/mypage?userNumber="+userNo+"");
 			sb.append("&cancel_url=http://www.localhost:8080/HotelDelLuna/index");
-			sb.append("&fail_url=http://www.localhost:8080/HotelDelLuna/login");
+			sb.append("&fail_url=http://www.localhost:8080/HotelDelLuna/index");
 			bw.write(sb.toString());
 			
 			bw.flush();

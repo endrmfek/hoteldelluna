@@ -76,7 +76,7 @@ public class ReservationController extends HttpServlet{
 			response.getWriter().println("<script type='text/javascript'>");
 			
 			response.getWriter().println("alert('로그인이 필요합니다..')");
-			response.getWriter().println("history.back();");
+			response.getWriter().println("location.href='login'");
 			
 			response.getWriter().println("</script>");
 		}

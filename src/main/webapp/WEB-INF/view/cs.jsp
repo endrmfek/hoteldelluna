@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,6 +28,7 @@
   <link rel="stylesheet" href="assets/css/responsive.css">
   <link rel="stylesheet" href="assets/css/cs.css">
 </head>
+
 <body>
 
   <!-- Preloader Start -->
@@ -43,46 +45,71 @@
   <!-- Preloader Start -->
 
   <header>
-    <!-- Header Start -->
-    <div class="header-area header-sticky">
-      <div class="main-header ">
-        <div class="container">
-          <div class="row align-items-center">
-            <!-- logo -->
-            <div class="col-xl-2 col-lg-2">
-              <div class="logo">
-                <a href="index.html"><img src="assets/img/logo/logo1.png" width="180" height="70" alt=""></a>
-              </div>
+        <!-- Header Start -->
+        <div class="header-area header-sticky">
+            <div class="main-header ">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <!-- logo -->
+                        <div class="col-xl-2 col-lg-2">
+                            <div class="logo">
+                            <a href="index"><img src="assets/img/logo/logo1.png" width="180" height="70" alt=""></a>
+                            </div>
+                        </div>
+                    <div class="col-xl-8 col-lg-8">
+                            <!-- main-menu -->
+                            <div class="main-menu f-right d-none d-lg-block">
+                                <nav>
+                                    <ul id="navigation">                                                                                                                                     
+                                        <li><a href="index">Home</a></li>
+                                        <li><a href="about.html">Notice</a></li>
+                                        <li><a href="services.html">Q&A</a></li>
+                                        <c:if test="${sessionId != null }">
+											<li><a href="mypage?userNumber=${userNo}">My Page</a></li>	
+										</c:if>
+                                        
+                                        <!-- <li><a href="blog.html">Community</a>
+                                            <ul class="submenu">
+                                                <li><a href="blog.html">Blog</a></li>
+                                                <li><a href="single-blog.html">Blog Details</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="#">Pages</a>
+                                            <ul class="submenu">
+                                                <li><a href="rooms.html">Rooms</a>
+                                                <li><a href="elements.html">Element</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="contact.html">Contact</a></li> -->
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>             
+                        <div class="col-xl-2 col-lg-2">
+                            <!-- header-btn -->
+                            <div class="header-btn">
+                            	<c:if test="${sessionId == null }">
+									<a href="login" class="btn btn1 d-none d-lg-block ">Login / Sign up</a>	
+									
+								</c:if>
+								<c:if test="${sessionId != null }">
+									<a href="logout" class="btn btn1 d-none d-lg-block ">Log Out</a>
+								</c:if>
+                                
+                            </div>
+                        </div>
+                        <!-- Mobile Menu -->
+                        <div class="col-12">
+                            <div class="mobile_menu d-block d-lg-none"></div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="col-xl-8 col-lg-8">
-              <!-- main-menu -->
-              <div class="main-menu f-right d-none d-lg-block">
-                <nav>
-                  <ul id="navigation">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="about.html">Notice</a></li>
-                    <li><a href="services.html">Q&A</a></li>
-                  </ul>
-                </nav>
-              </div>
-            </div>
-            <div class="col-xl-2 col-lg-2">
-              <!-- header-btn -->
-              <div class="header-btn">
-                <a href="#" class="btn btn1 d-none d-lg-block ">My Page</a>
-              </div>
-            </div>
-            <!-- Mobile Menu -->
-            <div class="col-12">
-              <div class="mobile_menu d-block d-lg-none"></div>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
-    <!-- Header End -->
-  </header>
+        <!-- Header End -->
+    </header>
 
+	<c:set var="u" value="${user}"/>
   <!-- Inquiry -->
   <div>
     <div class="customerInquiry">
@@ -91,49 +118,67 @@
       </div>
       <div class="box">
 
-        <!-- form -->
         <div class="inquiry form">
-          <h3>Send a Message</h3>
-          <form action="">
-            <div class="formBox">
-              <div class="row50">
-                <div class="inputBox">
-                  <span>Name</span>
-                  <input type="text" placeholder="Name" />
-                </div>
-              </div>
+					<h3>Send a Message</h3>
 
-              <div class="row50">
-                <div class="inputBox">
-                  <span>Email</span>
-                  <input type="text" placeholder="Email" />
-                </div>
-              </div>
+					<form action="csboardWrite" method="post" name="wfrm" enctype="multipart/form-data">
+						<div class="formBox">
+							<div class="row50">
+								<div class="select-this">
+									<div class="select-itms">
+										<select name="branch" id="select1">
+											<option value="서울">Seoul</option>
+											<option value="인천">Incheon</option>
+											<option value="부산">Busan</option>
+											<option value="제주">Jeju</option>
+										</select>
+									</div>
+								</div>
+							</div>
 
-              <div class="row50">
-                <div class="inputBox">
-                  <span>Mobile</span>
-                  <input type="text" placeholder="Mobile" />
-                </div>
-              </div>
+							<div class="row50">
+								<div class="inputBox">
+									<span>작성자</span> <input type="text" name="name"
+										placeholder="Write your name" value="${u.name}" readonly="readonly"/>
+								</div>
+							</div>
 
-              <div class="row10">
-                <div class="inputBox">
-                  <span>Message</span>
-                  <textarea name="" id="" cols="30" rows="10" placeholder="Write your messages here"></textarea>
-                </div>
-              </div>
+							<div class="row50">
+								<div class="inputBox">
+									<span>제목</span> <input type="text" name="subject"
+										placeholder="Write your subject" />
+								</div>
+							</div>
 
-              <div class="row10">
-                <div class="inputBox">
-                  <a href="#" class="btn border-btn">Send <i class="ti-angle-right"></i> </a>
-                </div>
-              </div>
+							<div class="row50">
+								<div class="inputBox">
+									<span>비밀번호</span> <input type="password" name="password"
+										placeholder="Write your password" />
+								</div>
+							</div>
 
+							<div class="row10">
+								<div class="inputBox">
+									<span>내용</span>
+									<textarea name="content" id="" cols="30" rows="10" placeholder="Write your messages here"></textarea>
+								</div>
+							</div>
 
-            </div>
-          </form>
-        </div>
+							<div class="row10">
+								<div class="inputBox">
+									<span>첨부파일</span> <input type="file" name="file" />
+								</div>
+							</div>
+							
+							<div class="row10">
+								<div class="inputBox">
+									<!-- <a href="cs_boardwrite_ok.jsp" id="wbtn" class="btn border-btn">Send<i class="ti-angle-right"></i></a>-->
+									<button type="submit" class="btn border-btn" id="submit">send</button>
+								</div>
+							</div>
+					</form>
+				</div>
+			</div>
 
         <!-- info -->
         <div class="inquiry info">
@@ -277,5 +322,25 @@
     <!-- Jquery Plugins, main Jquery -->
     <script src="./assets/js/plugins.js"></script>
     <script src="./assets/js/main.js"></script>
+    <script type="text/javascript">
+  
+    	document.getElementById("submit").onclick = function() {
+    		if(document.getElementsByName('subject')[0].value == '') {
+    			alert("제목을 입력해주세요!");
+    			return false;
+    		}
+    		if(document.getElementsByName('password')[0].value == '') {
+    			alert("비밀번호 입력해주세요!");
+    			return false;
+    		}
+    		if(document.getElementsByName('content')[0].value== '') {
+    			alert("내용을 입력해주세요!");
+    			return false;
+    		}
+    		
+    	}
+    
+    </script>
+    
 </body>
 </html>

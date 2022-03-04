@@ -214,11 +214,9 @@
                                     <select name="select" id="select1">
                                         <option value="s">Seoul</option>
                                         <option value="i">Incheon</option>
-                                        <option value="">경기</option>
-                                        <option value="">충청</option>
-                                        <option value="">전라</option>
-                                        <option value="">경상</option>
-                                        <option value="">강원</option>
+                                        <option value="">Busan</option>
+                                        <option value="">Jeju</option>
+                                        
                                     </select>
                                 </div>
                             </form>

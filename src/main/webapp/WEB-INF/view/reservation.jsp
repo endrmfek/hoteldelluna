@@ -181,23 +181,100 @@ body, div, ul, li {
 		};
 	};
 	
-	function listView(roomtype,totalprice){
+	function listView(userno, roomno, datepicker1, datepicker2, adult, child, totalprice, nights, roomtype, name, phone, email, requirement){
 	    let f = document.createElement('form');
 	    
-	    let obj;
-	    obj = document.createElement('input');
-	    obj.setAttribute('type', 'hidden');
-	    obj.setAttribute('name', 'roomtype');
-	    obj.setAttribute('value', roomtype);
+	    let obj1;
+	    obj1 = document.createElement('input');
+	    obj1.setAttribute('type', 'hidden');
+	    obj1.setAttribute('name', 'userNumber');
+	    obj1.setAttribute('value', userno);
 	    
 	    let obj2;
 	    obj2 = document.createElement('input');
 	    obj2.setAttribute('type', 'hidden');
-	    obj2.setAttribute('name', 'totalprice');
-	    obj2.setAttribute('value', totalprice);
+	    obj2.setAttribute('name', 'roomNumber');
+	    obj2.setAttribute('value', roomno);
 	    
-	    f.appendChild(obj);
+	    let obj3;
+	    obj3 = document.createElement('input');
+	    obj3.setAttribute('type', 'hidden');
+	    obj3.setAttribute('name', 'checkin');
+	    obj3.setAttribute('value', datepicker1);
+	    
+	    let obj4;
+	    obj4 = document.createElement('input');
+	    obj4.setAttribute('type', 'hidden');
+	    obj4.setAttribute('name', 'checkout');
+	    obj4.setAttribute('value', datepicker2);
+	    
+	    let obj5;
+	    obj5 = document.createElement('input');
+	    obj5.setAttribute('type', 'hidden');
+	    obj5.setAttribute('name', 'adult');
+	    obj5.setAttribute('value', adult);
+	    
+	    let obj6;
+	    obj6 = document.createElement('input');
+	    obj6.setAttribute('type', 'hidden');
+	    obj6.setAttribute('name', 'child');
+	    obj6.setAttribute('value', child);
+	    
+	    let obj7;
+	    obj7 = document.createElement('input');
+	    obj7.setAttribute('type', 'hidden');
+	    obj7.setAttribute('name', 'totalprice');
+	    obj7.setAttribute('value', totalprice);
+	    
+	    let obj8;
+	    obj8 = document.createElement('input');
+	    obj8.setAttribute('type', 'hidden');
+	    obj8.setAttribute('name', 'nights');
+	    obj8.setAttribute('value', nights);
+	    
+	    let obj9;
+	    obj9 = document.createElement('input');
+	    obj9.setAttribute('type', 'hidden');
+	    obj9.setAttribute('name', 'room');
+	    obj9.setAttribute('value', roomtype);
+	    
+	    let obj10;
+	    obj10 = document.createElement('input');
+	    obj10.setAttribute('type', 'hidden');
+	    obj10.setAttribute('name', 'name');
+	    obj10.setAttribute('value', name);
+	    
+	    let obj11;
+	    obj11 = document.createElement('input');
+	    obj11.setAttribute('type', 'hidden');
+	    obj11.setAttribute('name', 'phone');
+	    obj11.setAttribute('value', phone);
+	    
+	    let obj12;
+	    obj12 = document.createElement('input');
+	    obj12.setAttribute('type', 'hidden');
+	    obj12.setAttribute('name', 'email');
+	    obj12.setAttribute('value', email);
+	    
+	    let obj13;
+	    obj13 = document.createElement('input');
+	    obj13.setAttribute('type', 'hidden');
+	    obj13.setAttribute('name', 'requirement');
+	    obj13.setAttribute('value', requirement);
+	    
+	    f.appendChild(obj1);
 	    f.appendChild(obj2);
+	    f.appendChild(obj3);
+	    f.appendChild(obj4);
+	    f.appendChild(obj5);
+	    f.appendChild(obj6);
+	    f.appendChild(obj7);
+	    f.appendChild(obj8);
+	    f.appendChild(obj9);
+	    f.appendChild(obj10);
+	    f.appendChild(obj11);
+	    f.appendChild(obj12);
+	    f.appendChild(obj13);
 	    
 	    f.setAttribute('method', 'post');
 	    f.setAttribute('action', 'kakaoPay');
@@ -369,7 +446,7 @@ body, div, ul, li {
 											</div>
 											<div class="col-sm-10">
 												<div class="form-group">
-													<input class="form-control valid" name="email" type="text" value=""
+													<input class="form-control valid" id="email" name="email" type="text" value=""
 														onfocus="this.placeholder = ''"
 														onblur="this.placeholder = 'Enter email address'"
 														placeholder="Email">
@@ -382,7 +459,7 @@ body, div, ul, li {
 											</div>
 											<div class="col-10">
 												<div class="form-group">
-													<textarea class="form-control w-100" name="requirement"
+													<textarea class="form-control w-100" id="requirement"name="requirement"
 														cols="30" rows="9" onfocus="this.placeholder = ''"
 														onblur="this.placeholder = 'Enter Message'"
 														placeholder=" Enter Message"></textarea>
@@ -497,7 +574,7 @@ body, div, ul, li {
 										<div id="tab02">
 											<div align="center">
 											<br/><br/><br/><br/>
-                  							<a href="javascript:listView('${r.r_roomtype}', '${totalprice}')" class="button button-contactForm boxed-btn">카카오페이 결제하기</a>
+                  							<a href="javascript:listView('${u.no }', '${r.r_no}', '${param.datepicker1}','${param.datepicker2}', '${param.adult}', '${param.child}', '${totalprice}','${nights}' ,'${r.r_roomtype}','${param.name}' ,'${param.phone }', `\${document.getElementById('email').value}` , `\${document.getElementById('requirement').value}`)" class="button button-contactForm boxed-btn">카카오페이 결제하기</a>
                 							</div>
 										</div>
 									</div>
