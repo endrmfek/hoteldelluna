@@ -179,6 +179,7 @@ input:focus,
 input:focus,
 textarea,
 textarea:focus {
+   
   outline: 0;
 }
 

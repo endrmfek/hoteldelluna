@@ -106,6 +106,71 @@
 			document.mfrm.submit();
 		};
 	};
+	
+	
+    
+    function csboardview(no) {
+    	$('#board_list').css('display','none')
+    	$('#board_view').css('display','block')
+    	let board_no = no
+    	
+    	$.ajax( {
+    		url:'./csboardView',
+    		type:'get',
+    		dataType:'json',
+    		data: {
+    			board_no : board_no //이건 무시
+    		},
+    	
+    		success: function(json) {
+    			console.log(json)
+    			
+    			$.each( json.result, function(index, item) {
+    				if(item.filename == '') {
+    					item.filename = 'x';
+    				}
+    				
+    				document.getElementById('subject').innerText = item.subject;
+    				document.getElementById('name').innerText = item.name;
+    				document.getElementById('wdate').innerText = item.wdate;
+    				document.getElementById('hit').innerText = item.hit;
+    				document.getElementById('filename').innerText = item.filename;
+    				document.getElementById('content').innerText = item.content;
+    				
+    			});
+    			
+    			
+    			
+    		},
+    		error: function(e) {
+    			alert('서버에러 : ' + e.status);
+    		}
+    	})
+    }
+    
+    function csboardlist() {
+    	$('#board_list').css('display','block');
+    	$('#board_view').css('display','none');
+    	
+    	$.ajax( {
+    		url:'./csboardList',
+    		type:'get',
+    		dataType:'json',
+    		data: {
+    			
+    		},
+    		success: function(json) {
+    			$.each( json.result, function(index, item) {
+    				
+    				const count = 'count'+item.no;
+    				document.getElementById(count).innerText = item.hit;
+    			});
+    		},
+    		error: function(e) {
+    			alert('서버에러 : ' + e.status);
+    		}
+    	})
+    }
 </script>
 </head>
 
@@ -144,9 +209,7 @@
                                         <li><a href="index">Home</a></li>
                                         <li><a href="about.html">Notice</a></li>
                                         <li><a href="services.html">Q&A</a></li>
-                                        <c:if test="${sessionId != null }">
-											<li><a href="mypage?userNumber=${userNo}">My Page</a></li>	
-										</c:if>
+                                        
                                         
                                         <!-- <li><a href="blog.html">Community</a>
                                             <ul class="submenu">
@@ -175,6 +238,9 @@
 								<c:if test="${sessionId != null }">
 									<a href="logout" class="btn btn1 d-none d-lg-block ">Log Out</a>
 								</c:if>
+                                <%-- <c:if test="${sessionId != null }">
+                                	<a href="mypage?userNumber=${userNo}" class="btn btn1 d-none d-lg-block ">My Page</a>	
+								</c:if> --%>
                                 
                             </div>
                         </div>
@@ -301,12 +367,17 @@
                                             </form>
                                         </div>
                                     </div>
+                                    
+                                    
                                     <div class="tab">
                                         <input type="radio" name="tabgroup" id="tab-2"  checked>
                                         <label for="tab-2">예약 정보 확인</label>
                                         <div class="tab__content">
                                             <div id="s2">
                                                  <div class="row">
+                                                 	<c:if test="${empty bookings}">
+                                                 		<div style="font-size:24px;">예약이 없습니다.</div>
+                                                 	</c:if>
                                                  	<c:forEach var="b" items="${bookings}">
                                                     <div class="col-4">
                                                         <p>book ${b.b_no}</p>                                          
@@ -391,11 +462,11 @@
                                     <div class="tab">
                                         <input type="radio" name="tabgroup" id="tab-5">
                                         <label for="tab-5">고객 문의</label>
-                                        <div class="tab__content">
+                                        <div class="tab__content" >
                                             <div class="form-group mt-3" align="center">
                                              <div id="s2" >
                                              
-													<div class="board_wrap" >
+													<div class="board_wrap" id="board_list">
 													<form class="form-contact contact_form" action="csboardWrite" method="get" novalidate="novalidate">
 													
 														<div class="board_title">
@@ -415,11 +486,11 @@
 															<div>
 																<div class="num">${b.c_no }</div>
 																<div class="title">
-																	<a href="#">${b.c_subject }</a>
+																	<a href="javascript:csboardview('${b.c_no }')">${b.c_subject }</a>
 																</div>
 																<div class="writer">${b.c_name }</div>
 																<div class="date">${b.c_wdate }</div>
-																<div class="count">${b.c_hit }</div>
+																<div class="count" id="count${b.c_no}">${b.c_hit }</div>
 															</div>
 															</c:forEach>
 															
@@ -435,10 +506,9 @@
 																<li class="page-item"><a href="#" class="page-link"
 																	aria-label="Previous"> <i class="ti-angle-left"></i>
 																</a></li>
-																<li class="page-item"><a href="#" class="page-link">1</a>
+																<li class="page-item active"><a href="#" class="page-link">1</a>
 																</li>
-																<li class="page-item active"><a href="#"
-																	class="page-link">2</a></li>
+																
 																<li class="page-item"><a href="#" class="page-link"
 																	aria-label="Next"> <i class="ti-angle-right"></i>
 																</a></li>
@@ -447,9 +517,49 @@
 `													</form>
 													</div>
 													
+													<div class="board_wrap" id="board_view" style="display:none">
+													    <div class="board_title">
+													        <h3>나의 문의 내역</h3>
+													        <p></p>
+													    </div>
+													    <div class="board_view_wrap">
+													        <div class="board_view">
+													            <div class="title" id="subject">
+													                
+													            </div>
+													            <div class="info">
+													                <dl>
+													                    <dt>작성자</dt>
+													                    <dd id="name"></dd>
+													                </dl>
+													                <dl>
+													                    <dt>작성일</dt>
+													                    <dd id="wdate"></dd>
+													                </dl>
+													                <dl>
+													                    <dt>조회</dt>
+													                    <dd id="hit"></dd>
+													                </dl>
+													                <dl>
+													                    <dt>첨부파일</dt>
+													                    <dd id="filename"></dd>
+													                </dl>
+													            </div>
+													            <div class="cont" id="content">
+													            
+													            </div>
+													        </div>
+													
+													        <div class="form-group mt-3">
+													          <button type="submit" class="button button-contactForm boxed-btn" onclick="csboardlist()">목록</button>
+													        </div>
+													    </div>
+													</div>													
 												</div>
                                         </div>
                                     </div>
+                                    
+                                    
                                 </div>
                             </div>
                         </div>

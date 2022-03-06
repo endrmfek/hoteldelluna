@@ -52,9 +52,7 @@
                                         <li><a href="index">Home</a></li>
                                         <li><a href="about.html">Notice</a></li>
                                         <li><a href="services.html">Q&A</a></li>
-                                        <c:if test="${sessionId != null }">
-											<li><a href="mypage?userNumber=${userNo}">My Page</a></li>	
-										</c:if>
+                                        
                                         
                                         <!-- <li><a href="blog.html">Community</a>
                                             <ul class="submenu">
@@ -80,8 +78,11 @@
 									<a href="login" class="btn btn1 d-none d-lg-block ">Login / Sign up</a>	
 									
 								</c:if>
-								<c:if test="${sessionId != null }">
+								<%-- <c:if test="${sessionId != null }">
 									<a href="logout" class="btn btn1 d-none d-lg-block ">Log Out</a>
+								</c:if> --%>
+                                <c:if test="${sessionId != null }">
+                                	<a href="mypage?userNumber=${userNo}" class="btn btn1 d-none d-lg-block ">My Page</a>	
 								</c:if>
                                 
                             </div>
@@ -450,13 +451,13 @@
                               <label for="">Check-in *</label>
                               
                               <div class="boking-datepicker">
-                                    <input id="datepicker1"  placeholder="2022/03/01" name="datepicker1"/>
+                                    <input id="datepicker1"  placeholder="2022/03/01" name="datepicker1" autocomplete="off"/>
                               </div>
                            </div>
                            <div class="form-wrapper">
                               <label for="">Check-out *</label>
                               <div class="boking-datepicker">
-                                 <input id="datepicker2"  placeholder="2022/03/02" name="datepicker2"/>
+                                 <input id="datepicker2"  placeholder="2022/03/02" name="datepicker2" autocomplete="off"/>
                               </div>
                            </div>
                         </div>

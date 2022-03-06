@@ -17,25 +17,23 @@ import javax.sql.DataSource;
 import com.hoteldelluna.web.entity.CSBoard;
 import com.hoteldelluna.web.entity.CSBoardList;
 
-
-
 public class CSBoardService {
 	private DataSource dataSource;
 	private String uploadPath = "C:/jsp/jsp-workspace/HotelDelLuna/src/main/webapp/upload";
-	
+
 	public CSBoardService() {
 		// TODO Auto-generated constructor stub
-		
+
 		try {
 			Context initCtx = new InitialContext();
-			Context envCtx = (Context)initCtx.lookup("java:comp/env");
-			this.dataSource = (DataSource)envCtx.lookup("jdbc/OracleDB");
+			Context envCtx = (Context) initCtx.lookup("java:comp/env");
+			this.dataSource = (DataSource) envCtx.lookup("jdbc/OracleDB");
 		} catch (NamingException e) {
 			// TODO Auto-generated catch block
-			System.out.println("에러: " +  e.getMessage());
+			System.out.println("에러: " + e.getMessage());
 		}
 	}
-	
+
 	public int boardWrite(CSBoard to) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -53,27 +51,35 @@ public class CSBoardService {
 			pstmt.setString(6, to.getC_password());
 			pstmt.setString(7, to.getC_content());
 			pstmt.setString(8, to.getC_filename());
-			
-			if(pstmt.executeUpdate() == 1) {
+
+			if (pstmt.executeUpdate() == 1) {
 				flag = 0;
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			if(pstmt != null ) try {pstmt.close();} catch(SQLException e) {}
-			if(conn != null ) try {conn.close();} catch(SQLException e) {}
+			if (pstmt != null)
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+				}
+			if (conn != null)
+				try {
+					conn.close();
+				} catch (SQLException e) {
+				}
 		}
 		return flag;
 	}
-	
+
 	public int csboardWriteOk(CSBoard to) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-		
+
 		int flag = 1;
 		try {
 			conn = this.dataSource.getConnection();
-			
+
 			String sql = "insert into cs_board values (0, ?, ?, ?, ?, ?, ?, ?, 0, ?, now())";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, to.getC_branch());
@@ -84,58 +90,124 @@ public class CSBoardService {
 			pstmt.setString(6, to.getC_filename());
 			pstmt.setLong(7, to.getC_filesize());
 			pstmt.setString(8, to.getC_wip());
-			
-			if(pstmt.executeUpdate() == 1) {
+
+			if (pstmt.executeUpdate() == 1) {
 				flag = 0;
 			}
-		} catch(SQLException e) {
-			System.out.println("에러: " + e.getMessage() );
+		} catch (SQLException e) {
+			System.out.println("에러: " + e.getMessage());
 		} finally {
-			if(pstmt != null ) try {pstmt.close();} catch(SQLException e) {}
-			if(conn != null ) try {conn.close();} catch(SQLException e) {}
+			if (pstmt != null)
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+				}
+			if (conn != null)
+				try {
+					conn.close();
+				} catch (SQLException e) {
+				}
 		}
 		return flag;
 	}
-	
+
 	public ArrayList<CSBoard> csboardList() {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		
+
 		ArrayList<CSBoard> csboardLists = new ArrayList<CSBoard>();
 		try {
 			conn = this.dataSource.getConnection();
-			
+
 			String sql = "select * from cs_board order by c_no desc";
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 
-			
-			
-			while(rs.next()) {
+			while (rs.next()) {
 				CSBoard to = new CSBoard();
 				to.setC_no(rs.getString("c_no"));
 				to.setC_subject(rs.getString("c_subject"));
 				to.setC_name(rs.getString("c_name"));
 				int index = rs.getString("c_wdate").indexOf(' ');
-				String date = rs.getString("c_wdate").substring(0,index);
+				String date = rs.getString("c_wdate").substring(0, index);
 				to.setC_wdate(date);
 				to.setC_hit(rs.getString("c_hit"));
 				/* to.setC_wgap(rs.getInt("c_wgap")); */
-				
+
 				csboardLists.add(to);
 			}
 		} catch (SQLException e) {
 			System.out.println("에러: " + e.getMessage());
-		}  finally {
-			if(rs != null) try {rs.close();} catch(SQLException e) {}
-			if(pstmt != null) try {pstmt.close();} catch(SQLException e) {}
-			if(conn != null) try {conn.close();} catch(SQLException e) {}
+		} finally {
+			if (rs != null)
+				try {
+					rs.close();
+				} catch (SQLException e) {
+				}
+			if (pstmt != null)
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+				}
+			if (conn != null)
+				try {
+					conn.close();
+				} catch (SQLException e) {
+				}
 		}
 		return csboardLists;
 	}
 	
-	
+	public ArrayList<CSBoard> csboardList(int no) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		ArrayList<CSBoard> csboardLists = new ArrayList<CSBoard>();
+		try {
+			conn = this.dataSource.getConnection();
+
+			String sql = "select * from cs_board where c_u_no = ? order by c_no desc";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, no);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				CSBoard to = new CSBoard();
+				to.setC_no(rs.getString("c_no"));
+				to.setC_subject(rs.getString("c_subject"));
+				to.setC_name(rs.getString("c_name"));
+				int index = rs.getString("c_wdate").indexOf(' ');
+				String date = rs.getString("c_wdate").substring(0, index);
+				to.setC_wdate(date);
+				to.setC_hit(rs.getString("c_hit"));
+				/* to.setC_wgap(rs.getInt("c_wgap")); */
+
+				csboardLists.add(to);
+			}
+		} catch (SQLException e) {
+			System.out.println("에러: " + e.getMessage());
+		} finally {
+			if (rs != null)
+				try {
+					rs.close();
+				} catch (SQLException e) {
+				}
+			if (pstmt != null)
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+				}
+			if (conn != null)
+				try {
+					conn.close();
+				} catch (SQLException e) {
+				}
+		}
+		return csboardLists;
+	}
+
 //	public CSBoardList csboardList(CSBoardList listTO) {
 //		Connection conn = null;
 //		PreparedStatement pstmt = null;
@@ -194,30 +266,30 @@ public class CSBoardService {
 //		
 //		return listTO;
 //	}
-	
-	
+
 	public CSBoard csboardView(String no) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		CSBoard to = null;
-		
+
 		try {
 			conn = this.dataSource.getConnection();
+
 			
-			/*
-			 * String sql = "update cs_board set hit=hit+1 where seq=?"; pstmt =
-			 * conn.prepareStatement(sql); pstmt.setString(1, to.getSeq());
-			 * 
-			 * pstmt.executeUpdate();
-			 */
-			String sql = "select c_subject, c_name, c_email, c_wip, c_wdate, c_hit, c_content, c_filename, c_filesize from cs_board where c_no=?";
+			String sql1 = "update cs_board set c_hit=c_hit+1 where c_no=?"; 
+			pstmt = conn.prepareStatement(sql1); 
+			pstmt.setString(1, no);
+			  
+			pstmt.executeUpdate();
+			 
+			String sql = "select * from cs_board where c_no=?";
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, no); 
-			
+			pstmt.setString(1, no);
+
 			rs = pstmt.executeQuery();
-			
-			if(rs.next()) {
+
+			if (rs.next()) {
 				to = new CSBoard();
 				to.setC_subject(rs.getString("c_subject"));
 				to.setC_name(rs.getString("c_name"));
@@ -225,20 +297,33 @@ public class CSBoardService {
 				to.setC_wip(rs.getString("c_wip"));
 				to.setC_wdate(rs.getString("c_wdate"));
 				to.setC_hit(rs.getString("c_hit"));
-				to.setC_content(rs.getString("c_content") == null ? "" : rs.getString("c_content").replaceAll("\n", "<br>"));
+				to.setC_content(
+						rs.getString("c_content") == null ? "" : rs.getString("c_content").replaceAll("\n", "<br>"));
 				to.setC_filename(rs.getString("c_filename") == null ? "" : rs.getString("c_filename"));
 				to.setC_filesize(rs.getLong("c_filesize"));
-				
+
 				System.out.println(to.toString());
 			}
-		} catch(SQLException e) {
-			System.out.println( "에러: " + e.getMessage());
+		} catch (SQLException e) {
+			System.out.println("에러: " + e.getMessage());
 		} finally {
-			if( rs != null ) try {rs.close();} catch(SQLException e) {}
-			if( pstmt != null ) try {pstmt.close();} catch(SQLException e) {}
-			if( conn != null ) try {conn.close();} catch(SQLException e) {}
+			if (rs != null)
+				try {
+					rs.close();
+				} catch (SQLException e) {
+				}
+			if (pstmt != null)
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+				}
+			if (conn != null)
+				try {
+					conn.close();
+				} catch (SQLException e) {
+				}
 		}
-		
+
 		return to;
 	}
 }

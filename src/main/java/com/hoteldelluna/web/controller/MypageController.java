@@ -35,7 +35,7 @@ public class MypageController extends HttpServlet{
 		request.setAttribute("users", users);
 		
 		CSBoardService boardService = new CSBoardService();
-		ArrayList<CSBoard> board = boardService.csboardList();
+		ArrayList<CSBoard> board = boardService.csboardList(userNumber);
 		request.setAttribute("board", board);
 		
 		request.getRequestDispatcher("/WEB-INF/view/mypage.jsp").forward(request, response);

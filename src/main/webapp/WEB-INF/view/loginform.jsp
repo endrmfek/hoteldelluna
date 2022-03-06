@@ -79,7 +79,7 @@
     			$.each( json.result, function(index, item) {
     				
     				if($("#id").val() == item.id) {
-    					$("label[for = 'id' ]").append('<span style="color:red;">중복이다 친구야 ^^</span>');
+    					$("label[for = 'id' ]").append('<span style="color:red;">중복이야 ^^</span>');
     					check=true;
     				}
     			});
@@ -134,9 +134,7 @@
                                         <li><a href="index">Home</a></li>
                                         <li><a href="about.html">Notice</a></li>
                                         <li><a href="services.html">Q&A</a></li>
-                                        <c:if test="${sessionId != null }">
-											<li><a href="mypage?userNumber=${userNo}">My Page</a></li>	
-										</c:if>
+                                        
                                         
                                         <!-- <li><a href="blog.html">Community</a>
                                             <ul class="submenu">
@@ -162,8 +160,11 @@
 									<a href="login" class="btn btn1 d-none d-lg-block ">Login / Sign up</a>	
 									
 								</c:if>
-								<c:if test="${sessionId != null }">
+								<%-- <c:if test="${sessionId != null }">
 									<a href="logout" class="btn btn1 d-none d-lg-block ">Log Out</a>
+								</c:if> --%>
+                                <c:if test="${sessionId != null }">
+                                	<a href="mypage?userNumber=${userNo}" class="btn btn1 d-none d-lg-block ">My Page</a>	
 								</c:if>
                                 
                             </div>
