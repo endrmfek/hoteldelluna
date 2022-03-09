@@ -26,31 +26,31 @@
     <link rel="stylesheet" href="./assets/css/style.css" />
     <link rel="stylesheet" href="./assets/css/regform.css" />
     <script type="text/javascript">
-    window.onload() = function() {
+    window.onload = function() {
     	document.getElementById("submit").onclick = function() {
     		if(document.getElementById("id").value == '') {
-    			alert("아이디 입력해주세요!");
+    			alert("Enter your ID !");
     		}
     		if(document.getElementById("password").value == '') {
-    			alert("비밀번호 입력해주세요!");
+    			alert("Enter your PASSWORD !");
     		}
     		if(document.getElementById("re_password").value == '') {
-    			alert("비밀번호를 확인해주세요!");
+    			alert("Double check your PASSWORD !");
     		}
     		if(document.getElementById("first_name").value == '') {
-    			alert("이름을 입력하세요!");
+    			alert("Enter your FIRST_NAME !");
     		}
     		if(document.getElementById("last_name").value == '') {
-    			alert("이름을 입력해주세요!");
+    			alert("Enter your LAST_NAME !");
     		}
     		if(document.getElementById("birth_date").value == '') {
-    			alert("please id check");
+    			alert("Enter your BIRTH_DATE ! ");
     		}
     		if(document.getElementById("phone_number").value == '') {
-    			alert("please id check");
+    			alert("Enter your PHONE_NUMBER !");
     		}
     		if(document.getElementById("email").value == '') {
-    			alert("please id check");
+    			alert("Enter your EMAIL");
     		}
     		
     		
@@ -242,7 +242,7 @@
               </div>
               <div class="form-group">
                 <label for="phone_number">Phone number</label>
-                <input type="number" class="form-input" name="phone_number" id="phone_number" />
+                <input type="text" class="form-input" name="phone_number" id="phone_number" />
               </div>
               <div class="form-group">
                 <label for="email">Email</label>

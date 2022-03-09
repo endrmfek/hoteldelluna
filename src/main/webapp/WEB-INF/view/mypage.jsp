@@ -121,7 +121,7 @@
     		data: {
     			board_no : board_no //이건 무시
     		},
-    	
+    		
     		success: function(json) {
     			console.log(json)
     			
@@ -129,19 +129,15 @@
     				if(item.filename == '') {
     					item.filename = 'x';
     				}
-    				
     				document.getElementById('subject').innerText = item.subject;
     				document.getElementById('name').innerText = item.name;
     				document.getElementById('wdate').innerText = item.wdate;
     				document.getElementById('hit').innerText = item.hit;
     				document.getElementById('filename').innerText = item.filename;
     				document.getElementById('content').innerText = item.content;
-    				
     			});
-    			
-    			
-    			
     		},
+    		
     		error: function(e) {
     			alert('서버에러 : ' + e.status);
     		}

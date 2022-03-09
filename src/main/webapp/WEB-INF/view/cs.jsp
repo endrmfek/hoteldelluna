@@ -139,35 +139,35 @@
 
 							<div class="row50">
 								<div class="inputBox">
-									<span>작성자</span> <input type="text" name="name"
+									<span>Name</span> <input type="text" name="name"
 										placeholder="Write your name" value="${u.name}" readonly="readonly"/>
 								</div>
 							</div>
 
 							<div class="row50">
 								<div class="inputBox">
-									<span>제목</span> <input type="text" name="subject"
+									<span>Subject</span> <input type="text" name="subject"
 										placeholder="Write your subject" />
 								</div>
 							</div>
 
 							<div class="row50">
 								<div class="inputBox">
-									<span>비밀번호</span> <input type="password" name="password"
+									<span>Password</span> <input type="password" name="password"
 										placeholder="Write your password" />
 								</div>
 							</div>
 
 							<div class="row10">
 								<div class="inputBox">
-									<span>내용</span>
+									<span>Content</span>
 									<textarea name="content" id="" cols="30" rows="10" placeholder="Write your messages here"></textarea>
 								</div>
 							</div>
 
 							<div class="row10">
 								<div class="inputBox">
-									<span>첨부파일</span> <input type="file" name="file" />
+									<span>File</span> <input type="file" name="file" />
 								</div>
 							</div>
 							

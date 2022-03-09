@@ -240,7 +240,7 @@ public class LoginService {
 		return login;
 	}
 
-	public void deleteLogin(String[] delIds) {
+	public int deleteLogin(String[] delIds) {
 		int result =0;
 		String params = "";
 		for(int i=0; i<delIds.length; i++) {
@@ -252,12 +252,12 @@ public class LoginService {
 			
 		}
 		System.out.println(params);
-		String sql = "DELETE LOGIN WHERE ID IN ( "+params+")";
+		String sql = "DELETE users WHERE u_no IN ( "+params+")";
 		String url = "jdbc:oracle:thin:@localhost:1521/orclpdb";
 
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
-			Connection con = DriverManager.getConnection(url, "MINSOO", "11111");
+			Connection con = dataSource.getConnection();
 			Statement st = con.createStatement();
 			
 			result = st.executeUpdate(sql);
@@ -271,7 +271,7 @@ public class LoginService {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} 
-		
+		return result;
 		
 	}
 

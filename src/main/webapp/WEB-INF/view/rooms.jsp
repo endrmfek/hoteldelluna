@@ -32,6 +32,39 @@
   <link rel="stylesheet" href="assets/css/nice-select.css">
   <link rel="stylesheet" href="assets/css/reserv.css">
   <link rel="stylesheet" href="assets/css/responsive.css">
+  
+  <script type="text/javascript">
+  	function room(roomNo, date1, date2) {
+  		let f = document.createElement('form');
+  		
+  		let obj1;
+  		obj1 = document.createElement('input');
+  		obj1.setAttribute('type' , 'hidden');
+  		obj1.setAttribute('name', 'roomNo');
+  		obj1.setAttribute('value', roomNo);
+  		
+  		let obj2;
+  		obj2 = document.createElement('input');
+  		obj2.setAttribute('type' , 'hidden');
+  		obj2.setAttribute('name', 'date1');
+  		obj2.setAttribute('value', date1);
+  		
+  		let obj3;
+  		obj3 = document.createElement('input');
+  		obj3.setAttribute('type' , 'hidden');
+  		obj3.setAttribute('name', 'date2');
+  		obj3.setAttribute('value', date2);
+  		
+  		f.appendChild(obj1);
+	    f.appendChild(obj2);
+	    f.appendChild(obj3);
+	    
+	    f.setAttribute('method', 'post');
+	    f.setAttribute('action', 'roomDetail?roomNo='+roomNo+'');
+	    document.body.appendChild(f);
+	    f.submit();
+  	}
+  </script>
 </head>
 
 <body>
@@ -155,10 +188,10 @@
             <!-- Superior Single Room -->
             <div class="single-room mb-50">
               <div class="room-img">
-                <a href="roomDetail?roomNo=${r.r_no}"><img src="assets/img/rooms/${r.r_img}" alt=""></a>
+                <a href="javascript:room('${r.r_no}', '${param.datepicker1 }', '${param.datepicker2}')"><img src="assets/img/rooms/${r.r_img}" alt=""></a>
               </div>
               <div class="room-caption">
-                <h3><a href="#">${r.r_roomtype}</a></h3>
+                <h3><a href="javascript:room('${r.r_no}', '${param.datepicker1 }', '${param.datepicker2}')">${r.r_roomtype}</a></h3>
                 <div class="room-info">
                   <div class="room-info-menu">
                     <ion-icon name="bed"></ion-icon>

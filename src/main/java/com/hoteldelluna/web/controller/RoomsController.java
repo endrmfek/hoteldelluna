@@ -25,4 +25,12 @@ public class RoomsController extends HttpServlet{
 		request.getRequestDispatcher("/WEB-INF/view/rooms.jsp").forward(request, response);
 	}
 	
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		RoomService roomService = new RoomService();
+		ArrayList<Room> room = roomService.roomList();
+		request.setAttribute("room", room);
+		
+		request.getRequestDispatcher("/WEB-INF/view/rooms.jsp").forward(request, response);
+	}
 }

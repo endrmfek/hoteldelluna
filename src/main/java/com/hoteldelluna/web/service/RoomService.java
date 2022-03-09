@@ -1,9 +1,11 @@
 package com.hoteldelluna.web.service;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 import javax.naming.Context;
@@ -108,4 +110,100 @@ public class RoomService {
 	      }
 	      return room;
 	   }
+
+		public int insert(Room room) {
+			int result = 0;
+			
+			String sql = "INSERT INTO room(r_branch, r_star, r_img, r_roomtype, r_bedtype, r_occupancy, r_price) VALUES (?,?,?,?,?,?,?)";
+
+			try {
+				
+				Connection con = dataSource.getConnection();
+				PreparedStatement st = con.prepareStatement(sql);
+				st.setString(1, room.getR_branch());
+				st.setInt(2, room.getR_star());
+				st.setString(3, room.getR_img());
+				st.setString(4, room.getR_roomtype());
+				st.setString(5, room.getR_bedtype());
+				st.setInt(6, room.getR_occupancy());
+				st.setInt(7, Integer.parseInt(room.getR_price()));
+				
+				result = st.executeUpdate();
+				
+				st.close();
+				con.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} 
+			
+			return result; 
+		}
+
+		public int deleteRoom(String[] delIds) {
+			int result =0;
+			String params = "";
+			for(int i=0; i<delIds.length; i++) {
+				params += "'";
+				params += delIds[i];
+				params += "'";
+				if( i < delIds.length-1)
+					params += ',';
+				
+			}
+			System.out.println(params);
+			String sql = "DELETE room WHERE r_no IN ( "+params+")";
+			
+
+			try {
+				
+				Connection con = dataSource.getConnection();
+				Statement st = con.createStatement();
+				
+				result = st.executeUpdate(sql);
+				
+				st.close();
+				con.close();
+			}  catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} 
+			
+			return result;
+		}
+
+		public int updateRoom(Room room) {
+			// TODO Auto-generated method stub
+			int result = 0;
+			
+			
+
+			try {
+				
+				Connection con = dataSource.getConnection();
+				String sql = "update room set r_branch=?, r_star=?, r_roomtype=?, r_bedtype=?, r_occupancy=?, r_price=? where r_no=?";
+				PreparedStatement st = con.prepareStatement(sql);
+				st = con.prepareStatement( sql );
+				st.setString(1, room.getR_branch());
+				st.setInt(2, room.getR_star());
+				st.setString(3, room.getR_roomtype());
+				st.setString(4, room.getR_bedtype());
+				st.setInt(5, room.getR_occupancy());
+				st.setInt(6, Integer.parseInt(room.getR_price()));
+				st.setInt(7, room.getR_no());
+				
+				result = st.executeUpdate();
+				System.out.println(result);
+				st.close();
+				con.close();
+			}  catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} 
+			
+			return result; 
+			
+		}
+			
+		
 }

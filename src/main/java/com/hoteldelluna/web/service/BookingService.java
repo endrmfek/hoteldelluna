@@ -128,4 +128,56 @@ private DataSource dataSource;
 	      return bookings;
 	   }
 	
+	public List<Booking> bookingList() {
+		
+		      Connection conn = null;
+		      PreparedStatement pstmt = null;
+		      ResultSet rs = null;
+		      List<Booking> bookings = new ArrayList<Booking>();
+		      
+		   
+		      try {
+		         conn = this.dataSource.getConnection();
+		         
+		         String sql = "select * from booking";
+		         pstmt = conn.prepareStatement(sql);
+		         
+		         
+		         rs = pstmt.executeQuery();
+		         
+		         while(rs.next()) {
+		            Booking booking = new Booking();
+		            booking.setB_no(rs.getInt("b_no"));
+		            booking.setB_u_no(rs.getInt("b_u_no"));
+		            booking.setB_r_no(rs.getInt("b_r_no"));
+		            booking.setB_name(rs.getString("b_name"));
+		            booking.setB_phone(rs.getString("b_phone"));
+		            booking.setB_email(rs.getString("b_email"));
+		            booking.setB_requirement(rs.getString("b_requirement"));
+		            booking.setB_cardName(rs.getString("b_cardname"));
+		            booking.setB_cardC(rs.getString("b_cardc"));
+		            booking.setB_cardN(rs.getString("b_cardn"));
+		            booking.setB_expirationD(rs.getString("b_expirationd"));
+		            booking.setB_cvc(rs.getString("b_cvc"));
+		            booking.setB_adult(rs.getString("b_adult"));
+		            booking.setB_child(rs.getString("b_child"));
+		            booking.setB_ttlprice(rs.getInt("b_ttlprice"));
+		            booking.setB_chkin(rs.getString("b_chkin"));
+		            booking.setB_chkout(rs.getString("b_chkout"));
+		            booking.setB_nights(rs.getInt("b_nights"));
+		            booking.setB_room(rs.getString("b_room"));
+		            
+		            bookings.add(booking);
+		         }
+		         
+		         
+		      } catch(SQLException e) {
+		         System.out.println("에러: " + e.getMessage());
+		      } finally {
+		         if(rs != null) try {rs.close();} catch(SQLException e) {}
+		         if(pstmt != null) try {pstmt.close();} catch(SQLException e) {}
+		         if(conn != null) try {conn.close();} catch(SQLException e) {}
+		      }
+		      return bookings;
+	}
 }

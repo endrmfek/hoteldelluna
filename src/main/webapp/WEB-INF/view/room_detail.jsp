@@ -274,9 +274,9 @@
                   <img src="assets/img/blog/author.png" alt="" />
                   <div class="media-body">
                      <a href="#">
-                     <h4>매니저 강민수</h4>
+                     <h4>MANAGER JASON</h4>
                      </a>
-                     <p>항상 최고의 서비스를 제공하는 호텔델루나가 되겠습니다.</p>
+                     <p>welcome back!!</p>
                   </div>
                </div>
                </div>
@@ -435,7 +435,7 @@
                   <div class="inner">
                      <form action="reservation" method="post">
                      	<input type="hidden" name="roomNo" value="${r.r_no} "/>
-                        <h3>${r.r_price} / 박</h3>
+                        <h3>${r.r_price} KRW / day</h3>
                         <div class="form-row">
                            <div class="form-wrapper">
                               <label for="">Name *</label>
@@ -451,13 +451,13 @@
                               <label for="">Check-in *</label>
                               
                               <div class="boking-datepicker">
-                                    <input id="datepicker1"  placeholder="2022/03/01" name="datepicker1" autocomplete="off"/>
+                                    <input id="datepicker1"  value="${param.date1 }" name="datepicker1" autocomplete="off"/>
                               </div>
                            </div>
                            <div class="form-wrapper">
                               <label for="">Check-out *</label>
                               <div class="boking-datepicker">
-                                 <input id="datepicker2"  placeholder="2022/03/02" name="datepicker2" autocomplete="off"/>
+                                 <input id="datepicker2"  value="${param.date2 }" name="datepicker2" autocomplete="off"/>
                               </div>
                            </div>
                         </div>

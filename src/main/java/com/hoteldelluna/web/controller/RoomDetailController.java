@@ -24,4 +24,16 @@ public class RoomDetailController extends HttpServlet{
 		request.getRequestDispatcher("/WEB-INF/view/room_detail.jsp").forward(request, response);
 	}
 	
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int roomNo = Integer.parseInt(request.getParameter("roomNo"));
+		RoomService roomService = new RoomService();
+		Room room = roomService.foundRoom(roomNo);
+		
+		request.setAttribute("room", room);
+		
+		request.getRequestDispatcher("/WEB-INF/view/room_detail.jsp").forward(request, response);
+		
+	}
+	
 }

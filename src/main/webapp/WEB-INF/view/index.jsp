@@ -62,7 +62,7 @@
 		<script >
 			let count = 1;
 			if( count ==1) {
-				alert("${sessionId} 님 환영합니다.");
+				alert("Welcome ${sessionId} !!");
 				count = count+1;
 			}
 			
@@ -200,7 +200,7 @@
             <div class="container">
             <div class="row ">
             <div class="col-12">
-                <form action="">
+                <form action="rooms" method="post">
                 <div class="booking-wrap d-flex justify-content-between align-items-center">
                 
                     <!-- Single Select Box -->
@@ -231,7 +231,7 @@
                             <span> Check In Date:</span>
                         </div>
                         <div class="boking-datepicker">
-                            <input id="datepicker1"  placeholder="03/01/2022" autocomplete="off"/>
+                            <input id="datepicker1"  placeholder="03/01/2022" autocomplete="off" name="datepicker1"/>
                         </div>
                 </div>
                     <!-- Single Select Box -->
@@ -241,7 +241,7 @@
                             <span>Check OutDate:</span>
                         </div>
                         <div class="boking-datepicker">
-                            <input id="datepicker2"  placeholder="03/02/2022" autocomplete="off"/>
+                            <input id="datepicker2"  placeholder="03/02/2022" autocomplete="off" name="datepicker2"/>
                         </div>
                 </div>
                     <!-- Single Select Box -->
@@ -302,7 +302,8 @@
                 	</div> -->
                     <!-- Single Select Box -->
                     <div class="single-select-box pt-45 mb-30">
-                        <a href="rooms" class="btn select-btn" id="submit">Book Now</a>
+                        <!-- <a href="rooms" class="btn select-btn" id="submit">Book Now</a> -->
+                        <button type="submit" class="btn select-btn" id="submit">Book Now</button>
                 </div>
                 </div>
             </form>

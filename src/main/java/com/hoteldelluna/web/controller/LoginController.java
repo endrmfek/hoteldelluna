@@ -39,8 +39,8 @@ public class LoginController extends HttpServlet{
 				session.setAttribute("userNo", userNo);
 			}
 			
-			PrintWriter out = response.getWriter(); 
-			out.println("<script>alert('환영합니다 "+id+"님'); location.href='index';</script>"); 
+			PrintWriter out = response.getWriter();
+			out.println("<script>alert('welcome "+id+"님'); location.href='index';</script>"); 
 			out.flush();
 
 			
@@ -75,9 +75,18 @@ public class LoginController extends HttpServlet{
 			session.setAttribute("sessionId", id);
 			session.setAttribute("userNo", userNo);
 			
-			PrintWriter out = response.getWriter(); 
-			out.println("<script>alert('환영합니다 "+id+"님'); location.href='index';</script>"); 
-			out.flush();
+			if(id.equals("admin")) {
+				
+				PrintWriter out = response.getWriter(); 
+				out.println("<script>alert('welcome "+id+" '); location.href='adminIndex';</script>"); 
+				out.flush();
+			} else {
+				PrintWriter out = response.getWriter(); 
+				out.println("<script>alert('welcome "+id+" '); location.href='index';</script>"); 
+				out.flush();
+			}
+			
+			
 			
 		} else {
 			request.setAttribute("logincheck", logincheck);
