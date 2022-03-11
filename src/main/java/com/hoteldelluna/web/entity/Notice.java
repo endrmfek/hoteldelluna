@@ -11,6 +11,17 @@ public class Notice {
 	private String n_pwd;
 	private String ndate;
 	private String nhit;
+	private int wgap;
+	
+	
+	
+	
+	public int getWgap() {
+		return wgap;
+	}
+	public void setWgap(int wgap) {
+		this.wgap = wgap;
+	}
 	
 	public String getN_no() {
 		return n_no;

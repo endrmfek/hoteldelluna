@@ -323,8 +323,8 @@ body, div, ul, li {
                                 <nav>
                                     <ul id="navigation">                                                                                                                                     
                                         <li><a href="index">Home</a></li>
-                                        <li><a href="about.html">Notice</a></li>
-                                        <li><a href="services.html">Q&A</a></li>
+                                        <li><a href="noticelist">Notice</a></li>
+                                        <li><a href="faqlist">Q&A</a></li>
                                         
                                         
                                         <!-- <li><a href="blog.html">Community</a>

@@ -17,7 +17,7 @@ public class CSManageController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		CSBoardService boardService = new CSBoardService();
-		List<CSBoard> list = boardService.csboardList();
+		List<CSBoard> list = boardService.csmanageboardList();
 		request.setAttribute("list", list);
 		
 		request.getRequestDispatcher("/WEB-INF/view/admin/cs/cs_manager.jsp").forward(request, response);

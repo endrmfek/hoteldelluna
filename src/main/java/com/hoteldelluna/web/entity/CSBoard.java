@@ -16,7 +16,31 @@ public class CSBoard {
 		private String c_wip;
 		private String c_wdate;
 		private int c_wgap;
+		private int c_grp;
+		private int c_grps;
+		private int c_grpl;
 		
+		
+		
+		
+		public int getC_grp() {
+			return c_grp;
+		}
+		public void setC_grp(int c_grp) {
+			this.c_grp = c_grp;
+		}
+		public int getC_grps() {
+			return c_grps;
+		}
+		public void setC_grps(int c_grps) {
+			this.c_grps = c_grps;
+		}
+		public int getC_grpl() {
+			return c_grpl;
+		}
+		public void setC_grpl(int c_grpl) {
+			this.c_grpl = c_grpl;
+		}
 		public String getC_no() {
 			return c_no;
 		}
@@ -107,14 +131,11 @@ public class CSBoard {
 					+ c_subject + ", c_name=" + c_name + ", c_email=" + c_email + ", c_password=" + c_password
 					+ ", c_content=" + c_content + ", c_filename=" + c_filename + ", c_filesize=" + c_filesize
 					+ ", c_hit=" + c_hit + ", c_wip=" + c_wip + ", c_wdate=" + c_wdate + ", c_wgap=" + c_wgap
-					+ ", getC_no()=" + getC_no() + ", getC_branch()=" + getC_branch() + ", getC_subject()="
-					+ getC_subject() + ", getC_name()=" + getC_name() + ", getC_email()=" + getC_email()
-					+ ", getC_password()=" + getC_password() + ", getC_content()=" + getC_content()
-					+ ", getC_filename()=" + getC_filename() + ", getC_filesize()=" + getC_filesize() + ", getC_hit()="
-					+ getC_hit() + ", getC_wip()=" + getC_wip() + ", getC_wdate()=" + getC_wdate() + ", getC_wgap()="
-					+ getC_wgap() + ", getC_u_no()=" + getC_u_no() + ", getClass()=" + getClass() + ", hashCode()="
-					+ hashCode() + ", toString()=" + super.toString() + "]";
+					+ ", c_grp=" + c_grp + ", c_grps=" + c_grps + ", c_grpl=" + c_grpl + "]";
 		}
+		
+		
+		
 		
 		
 	

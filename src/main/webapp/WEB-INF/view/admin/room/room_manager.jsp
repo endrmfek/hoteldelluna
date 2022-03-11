@@ -55,6 +55,26 @@
 <link rel="stylesheet" href="admin/assets/hcss/nice-select.css">
 <link rel="stylesheet" href="admin/assets/hcss/reserv.css">
 <link rel="stylesheet" href="admin/assets/hcss/responsive.css">
+<link rel="stylesheet" href="admin/assets/css/room_write.css">
+
+<script type="text/javascript">
+	window.onload = function() {
+		let list = document.getElementById("select1")
+		
+		for(let i=0; i<list.options.length; i++) {
+			if(list.options[i].value == '${param.value}'){
+				document.getElementById("select1").selectedIndex = i
+			}
+			
+		}
+	}
+	
+	function roomlist() {
+		let room = document.getElementById('select1').value;
+		location.href='roommanage?value='+room;
+	}
+</script>
+
 </head>
 <body>
 	<div id="app">
@@ -150,6 +170,22 @@
 											<!-- font-back-title -->
 										</div>
 									</div>
+									
+									
+										<div class="row50">
+											<div class="select-this">
+												<div class="select-itms">
+													<select name="branch" id="select1" style="margin-bottom: 20px" onchange="roomlist()">
+														<option value="%">All</option>
+														<option value="Seoul">Seoul</option>
+														<option value="Incheon">Incheon</option>
+														<option value="Busan">Busan</option>
+														<option value="Jeju">Jeju</option>
+													</select>
+												</div>
+											</div>
+										</div>
+									
 									<div class="row">
 										<c:forEach var="r" items="${room}">
 								          <div class="col-xl-4 col-lg-6 col-md-6">
@@ -215,5 +251,6 @@
 		let dataTable = new simpleDatatables.DataTable(table1);
 	</script>
 	<script src="admin/assets/js/mazer.js"></script>
+	
 </body>
 </html>

@@ -203,8 +203,8 @@
                                 <nav>
                                     <ul id="navigation">                                                                                                                                     
                                         <li><a href="index">Home</a></li>
-                                        <li><a href="about.html">Notice</a></li>
-                                        <li><a href="services.html">Q&A</a></li>
+                                        <li><a href="noticelist">Notice</a></li>
+                                        <li><a href="faqlist">Q&A</a></li>
                                         
                                         
                                         <!-- <li><a href="blog.html">Community</a>
@@ -233,7 +233,7 @@
 								</c:if>
 								<c:if test="${sessionId != null }">
 									<a href="logout" class="btn btn1 d-none d-lg-block ">Log Out</a>
-								</c:if>
+								</c:if> 
                                 <%-- <c:if test="${sessionId != null }">
                                 	<a href="mypage?userNumber=${userNo}" class="btn btn1 d-none d-lg-block ">My Page</a>	
 								</c:if> --%>

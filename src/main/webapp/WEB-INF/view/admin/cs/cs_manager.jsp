@@ -1,6 +1,49 @@
+<%@page import="com.hoteldelluna.web.entity.CSBoard"%>
+<%@page import="com.hoteldelluna.web.service.CSBoardService"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+
+<%@ page import="java.util.ArrayList" %>
+
+<%
+	CSBoardService dao = new CSBoardService();
+	ArrayList<CSBoard> csboardLists = dao.csboardList();
+
+	int totalRecord = csboardLists.size();
+	
+	StringBuffer sbHtml = new StringBuffer();
+		
+		for(CSBoard to : csboardLists) {
+			String c_no = to.getC_no();
+			
+			int c_grpl = to.getC_grpl();
+			String c_sgrpl = "";
+			
+			for(int j = 1; j <= c_grpl; j++) {
+				c_sgrpl += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+			}
+				
+			String c_subject = to.getC_subject();
+			String c_name = to.getC_name();
+			String c_wdate = to.getC_wdate();
+			String c_hit = to.getC_hit();
+			
+			sbHtml.append("<tr>");
+			sbHtml.append("	<td>" + c_no + "</td>");
+			sbHtml.append("	<td>");
+			
+			if(c_grpl != 0) {
+				sbHtml.append(c_sgrpl + "<img src='images/icon_re2.gif' />" + "&nbsp;&nbsp;");
+			}
+			sbHtml.append("<a href='csview?c_no=" + c_no + "'>" + c_subject + "</a></td>");
+			sbHtml.append("	<td>" + c_name + "</td>");
+			sbHtml.append("	<td>" + c_wdate + "</td>");
+			sbHtml.append("	<td>" + c_hit + "</td>");
+			sbHtml.append("</tr>");
+		}
+%>
+	
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,63 +70,58 @@
 	<div id="app">
 		<div id="sidebar" class="active">
 			<div class="sidebar-wrapper active">
-				<!--꼭 필요-->
-
-				<div class="d-flex justify-content-between">
-					<div class="mylogo">
-						<a href="index.jsp"><img src="admin/assets/images/logo/logo.png"
-							width="180" height="70"></a>
-					</div>
+				<div class="mylogo">
+					<a href="index.do"><img src="admin/assets/images/logo/logo.png" width="180" height="70"></a>
+				</div>
+				<div class="toggler">
+					<a href="#" class="sidebar-hide d-xl-none d-block"><i
+						class="bi bi-x bi-middle"></i></a>
 				</div>
 				<div class="sidebar-menu">
 					<ul class="menu">
-						<li class="sidebar-item active ">
-							<a href="index.jsp" class='sidebar-link'> <i class="bi bi-grid-fill"></i> 
-								<span>Main</span>
-							</a>
+						<li class="sidebar-item active "><a href="index.do"
+							class='sidebar-link'><i class="bi bi-grid-fill"></i><span>Main</span></a>
 						</li>
-						<li class="sidebar-item  has-sub">
-							<a href="#"class='sidebar-link'> 
-								<i class="bi bi-file-earmark-spreadsheet-fill"></i> 
-								<span>회원 관리</span>
-							</a>
+						<li class="sidebar-item  has-sub"><a href="#"
+							class='sidebar-link'> <i
+								class="bi bi-file-earmark-spreadsheet-fill"></i> <span>회원
+									관리</span>
+						</a>
 							<ul class="submenu ">
-								<li class="submenu-item ">
-									<a href="usermanage">회원 관리</a>
-								</li>
-							</ul>
-						</li>
+								<li class="submenu-item "><a href="users_manager.do">회원
+										관리</a></li>
+							</ul></li>
 						<li class="sidebar-item  has-sub"><a href="#"
 							class='sidebar-link'> <i
 								class="bi bi-file-earmark-spreadsheet-fill"></i> <span>예약
 									관리</span>
 						</a>
 							<ul class="submenu ">
-								<li class="submenu-item "><a
-									href="resrvmanage">예약 관리</a></li>
+								<li class="submenu-item "><a href="reservation_manager.do">예약
+										관리</a></li>
 							</ul></li>
-						<li class="sidebar-item  has-sub">
-							<a href="#" class='sidebar-link'> 
-								<i class="bi bi-file-earmark-spreadsheet-fill"></i> 
-								<span>객실 관리</span>
-							</a>
-						<ul class="submenu ">
-							<li class="submenu-item ">
-								<a href="roommanage">객실 관리</a>
-							</li>
-						</ul>
-						</li>
-						<li class="sidebar-item  has-sub">
-							<a href="#" class='sidebar-link'> 
-							<i class="bi bi-file-earmark-spreadsheet-fill"></i> 
-							<span>게시판 관리</span>
+						<li class="sidebar-item  has-sub"><a href="#"
+							class='sidebar-link'> <i
+								class="bi bi-file-earmark-spreadsheet-fill"></i> <span>객실
+									관리</span>
 						</a>
 							<ul class="submenu ">
-								<li class="submenu-item "><a href="noticemanage">Notice</a></li>
-								<li class="submenu-item "><a href="faqmanage">FAQ</a></li>
-								<li class="submenu-item "><a href="csmanage">일대일 문의</a></li>
-							</ul>
-						</li>
+								<li class="submenu-item "><a href="room_manager.do">객실
+										관리</a></li>
+							</ul></li>
+						<li class="sidebar-item  has-sub"><a href="#"
+							class='sidebar-link'> <i
+								class="bi bi-file-earmark-spreadsheet-fill"></i> <span>게시판
+									관리</span>
+						</a>
+							<ul class="submenu ">
+								<li class="submenu-item "><a href="notice_manager.do">Notice</a>
+								</li>
+								<li class="submenu-item "><a href="faqlist.do">FAQ</a>
+								</li>
+								<li class="submenu-item "><a href="cs_manager.do">일대일
+										문의</a></li>
+							</ul></li>
 					</ul>
 				</div>
 				<button class="sidebar-toggler btn x">
@@ -105,30 +143,30 @@
 						</div>
 					</div>
 				</div>
-				
 				<section class="section">
 					<div class="card">
 						<div class="card-body">
 							<table class="table table-striped" id="table1">
 								<thead>
 									<tr>
-										<th>no</th>
+										<th>No</th>
 										<th>Subject</th>
 										<th>Name</th>
 										<th>WriteDate</th>
-										<th>HIt</th>
+										<th>Hit</th>
 									</tr>
 								</thead>
 								<tbody>
-									<c:forEach var="l" items="${list }">
+								<!--  
 									<tr>
-										<td>${l.c_no }</td>
-										<td><a href="cs_manager_view.jsp">${l.c_subject }</a></td>
-										<td>${l.c_name }</td>
-										<td>${l.c_wdate }</td>
-										<td>${l.c_hit }</td>
+										<td>100</td>
+										<td><a href="cs_manager_view.do">진짜 취소 안되나여?</a></td>
+										<td>김소정</td>
+										<td>2022-03-04</td>
+										<td>1</td>
 									</tr>
-									</c:forEach>
+								 -->
+								<%=sbHtml.toString() %>
 								</tbody>
 							</table>
 						</div>

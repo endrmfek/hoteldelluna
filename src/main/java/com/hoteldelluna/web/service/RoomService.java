@@ -71,6 +71,47 @@ public class RoomService {
       return roomLists;
    }
    
+   public ArrayList<Room> roomList(String branch) {
+	   Connection conn = null;
+	      PreparedStatement pstmt = null;
+	      ResultSet rs = null;
+	      
+	      ArrayList<Room> roomLists = new ArrayList<Room>();
+	   
+	      try {
+	         conn = this.dataSource.getConnection();
+	         
+	         String sql = "select r_no, r_branch , r_star, r_img, r_roomtype, r_bedtype, r_occupancy, to_char(r_price, '999,999') as r_price from room where r_branch like ?";
+	         pstmt = conn.prepareStatement(sql);
+	         pstmt.setString(1, branch);
+	         
+	         rs = pstmt.executeQuery();
+	         
+	         while(rs.next()) {
+	            Room to = new Room();
+	            to.setR_no(rs.getInt("r_no"));
+	            to.setR_branch(rs.getString("r_branch"));
+	            to.setR_star(rs.getInt("r_star"));
+	            to.setR_img(rs.getString("r_img"));
+	            to.setR_roomtype(rs.getString("r_roomtype"));
+	            to.setR_bedtype(rs.getString("r_bedtype"));
+	            to.setR_occupancy(rs.getInt("r_occupancy"));
+	            to.setR_price(rs.getString("r_price"));
+	            
+	            System.out.println(to.toString());
+	            roomLists.add(to);
+	         }
+	      } catch(SQLException e) {
+	         System.out.println("에러: " + e.getMessage());
+	      } finally {
+	         if(rs != null) try {rs.close();} catch(SQLException e) {}
+	         if(pstmt != null) try {pstmt.close();} catch(SQLException e) {}
+	         if(conn != null) try {conn.close();} catch(SQLException e) {}
+	      }
+	      return roomLists;
+	}
+		
+   
    public Room foundRoom(int roomNo) {
 	      Connection conn = null;
 	      PreparedStatement pstmt = null;
@@ -204,6 +245,7 @@ public class RoomService {
 			return result; 
 			
 		}
-			
+
+		
 		
 }

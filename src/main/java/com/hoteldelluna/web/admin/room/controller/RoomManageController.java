@@ -19,10 +19,21 @@ import com.hoteldelluna.web.service.RoomService;
 public class RoomManageController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RoomService roomservice = new RoomService();
-		ArrayList<Room> roomlist = roomservice.roomList();
-		request.setAttribute("room", roomlist);
+		String branch = request.getParameter("value");
 		
+		
+		if(branch != null) {
+			RoomService roomservice = new RoomService();
+			ArrayList<Room> roomlist = roomservice.roomList(branch);
+			request.setAttribute("room", roomlist);
+			
+		} else {
+			RoomService roomservice = new RoomService();
+			ArrayList<Room> roomlist = roomservice.roomList();
+			request.setAttribute("room", roomlist);
+		}
+		
+	
 		request.getRequestDispatcher("/WEB-INF/view/admin/room/room_manager.jsp").forward(request, response);
 	}
 	
