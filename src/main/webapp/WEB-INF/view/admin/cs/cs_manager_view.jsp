@@ -1,16 +1,20 @@
-<%@page import="com.hoteldelluna.web.service.CSBoardService"%>
-<%@page import="com.hoteldelluna.web.entity.CSBoard"%>
+<%@page import="com.hoteldelluna.web.entity.CSBoardTO"%>
+<%@page import="com.hoteldelluna.web.service.CSBoardDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 	
 
 
 <%
-	CSBoard to = (CSBoard)request.getAttribute("to");
+	request.setCharacterEncoding("utf-8");
+
+	//CSBoardTO to = new CSBoardTO();
+	//to.setC_no(request.getParameter("c_no"));
 	String c_no = request.getParameter("c_no");
 	
-	CSBoardService dao = new CSBoardService();
-	//CSBoardTO to = dao.csboardView(c_no);
+	CSBoardDAO dao = new CSBoardDAO();
+	//to = dao.csboardView(to);
+	CSBoardTO to = dao.csboardView(c_no);
 	
 	String c_subject = to.getC_subject();
 	String c_name = to.getC_name();
@@ -35,7 +39,8 @@
 </style>
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="ets/css/bootstrap.css">
+<link rel="stylesheet" href="admin/assets/css/bootstrap.css">
+<!-- <link rel="stylesheet" href="admin/assets/css/bootstrap.rtl.css"> -->
 <link rel="stylesheet" href="admin/assets/vendors/simple-datatables/style.css">
 <link rel="stylesheet" href="admin/assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
 <link rel="stylesheet" href="admin/assets/vendors/bootstrap-icons/bootstrap-icons.css">
@@ -48,7 +53,7 @@
 		<div id="sidebar" class="active">
 			<div class="sidebar-wrapper active">
 				<div class="mylogo">
-					<a href="index.do"><img src="admin/assets/images/logo/logo.png"
+					<a href="index.jsp"><img src="admin/assets/images/logo/logo.png"
 						width="180" height="70"></a>
 				</div>
 				<div class="toggler">
@@ -57,7 +62,7 @@
 				</div>
 				<div class="sidebar-menu">
 					<ul class="menu">
-						<li class="sidebar-item active "><a href="index.do"
+						<li class="sidebar-item active "><a href="index.jsp"
 							class='sidebar-link'> <i class="bi bi-grid-fill"></i> <span>Main</span>
 						</a></li>
 						<li class="sidebar-item  has-sub"><a href="#"
@@ -66,7 +71,7 @@
 									관리</span>
 						</a>
 							<ul class="submenu ">
-								<li class="submenu-item "><a href="users_manager.do">회원
+								<li class="submenu-item "><a href="users_manager.jsp">회원
 										관리</a></li>
 							</ul></li>
 						<li class="sidebar-item  has-sub"><a href="#"
@@ -75,7 +80,7 @@
 									관리</span>
 						</a>
 							<ul class="submenu ">
-								<li class="submenu-item "><a href="reservation_manager.do">예약
+								<li class="submenu-item "><a href="reservation_manager.jsp">예약
 										관리</a></li>
 							</ul></li>
 						<li class="sidebar-item  has-sub"><a href="#"
@@ -84,7 +89,7 @@
 									관리</span>
 						</a>
 							<ul class="submenu ">
-								<li class="submenu-item "><a href="room_manager.do">객실
+								<li class="submenu-item "><a href="room_manager.jsp">객실
 										관리</a></li>
 							</ul></li>
 						<li class="sidebar-item  has-sub"><a href="#"
@@ -93,11 +98,11 @@
 									관리</span>
 						</a>
 							<ul class="submenu ">
-								<li class="submenu-item "><a href="notice_manager.do">Notice</a>
+								<li class="submenu-item "><a href="notice_manager.jsp">Notice</a>
 								</li>
-								<li class="submenu-item "><a href="faqlist.do">FAQ</a>
+								<li class="submenu-item "><a href="FAQ_manager.jsp">FAQ</a>
 								</li>
-								<li class="submenu-item "><a href="cs_manager.do">일대일
+								<li class="submenu-item "><a href="cs_manager.jsp">일대일
 										문의</a></li>
 							</ul></li>
 					</ul>
@@ -131,9 +136,9 @@
 										<table>
 											<tr>
 												<th width="10%">제목</th>
-												<td width="60%"><%=c_subject %></td>
+												<td width="50%"><%=c_subject %></td>
 												<th width="10%">등록일</th>
-												<td width="20%"><%=c_wdate %></td>
+												<td width="30%"><%=c_wdate %></td>
 											</tr>
 											<tr>
 												<th>글쓴이</th>
@@ -151,12 +156,12 @@
 									<div class="btn_area">
 										<div class="align_left">
 											<input type="button" value="목록" class="btn_list btn_txt02" style="cursor: pointer;"
-												onclick="location.href='csmanage'" />
+												onclick="location.href='csmanager'" />
 										</div>
 										<div class="align_right">
 
 											<input type="button" value="답글쓰기" id="csbtn" class="btn_write btn_txt01" style="cursor: pointer;"
-												onclick="location.href='csreply?c_no=<%=c_no%>'" />
+												onclick="location.href='csreply?c_no=<%=c_no %>'" />
 										</div>
 									</div>
 									<!--//게시판-->

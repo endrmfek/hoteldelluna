@@ -10,6 +10,7 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import com.hoteldelluna.web.entity.Login;
 import com.hoteldelluna.web.entity.Users;
 
 public class UsersService {
@@ -55,7 +56,7 @@ public class UsersService {
 		return to;
 	}
 
-	public int mypageOK(Users to) {
+	public int mypageOK(Login to) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		
@@ -63,17 +64,17 @@ public class UsersService {
 		try {
 			Context initCtx=new InitialContext();
 		 	Context envCtx=(Context)initCtx.lookup("java:comp/env");
-		 	DataSource dataSource=(DataSource)envCtx.lookup("jdbc/mariadb2");
+		 	DataSource dataSource=(DataSource)envCtx.lookup("jdbc/OracleDB");
 		 	
 		 	conn=dataSource.getConnection();
 			
 			String sql = "update users set u_birth=?, u_phone=?, u_email=? where u_no=? and u_pwd=?";
 			pstmt = conn.prepareStatement( sql );
-			pstmt.setString( 1, to.getU_birth() );
-			pstmt.setString( 2, to.getU_phone() );
-			pstmt.setString( 3, to.getU_email() );
-			pstmt.setInt( 4, to.getU_no() );
-			pstmt.setString( 5, to.getU_pwd() );
+			pstmt.setString( 1, to.getBirth() );
+			pstmt.setString( 2, to.getPhone() );
+			pstmt.setString( 3, to.getEmail() );
+			pstmt.setInt( 4, to.getNo() );
+			pstmt.setString( 5, to.getPwd() );
 			
 			int result = pstmt.executeUpdate(); 
 			if( result == 0 ) {

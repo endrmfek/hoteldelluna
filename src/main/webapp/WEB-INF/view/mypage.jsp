@@ -285,7 +285,7 @@
                                     <label for="tab-1">계정 정보</label>
                                     <div class="tab__content">
                                         <div id="s2">
-                                            <form class="form-contact contact_form" action="mypage_ok.jsp" method="post" id="mfrm" novalidate="novalidate">
+                                            <form class="form-contact contact_form" action="mypage" method="post" id="mfrm" novalidate="novalidate">
                                                 <input type="hidden" name="userNumber" value="${u.no }"/>                                               
                                               
                                                 <div class="row">
@@ -416,7 +416,7 @@
                                                 fuga porro eius animi earum excepturi omnis! Reprehenderit!</p>
                                         </div>
                                     </div> -->
-                                    <div class="tab">
+                                     <div class="tab">
                                         <input type="radio" name="tabgroup" id="tab-4">
                                         <label for="tab-4">이용 후기</label>
                                         <div class="tab__content">
@@ -453,7 +453,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    
+                                     
                                     
                                     <div class="tab">
                                         <input type="radio" name="tabgroup" id="tab-5">
@@ -482,7 +482,7 @@
 															<div>
 																<div class="num">${b.c_no }</div>
 																<div class="title">
-																	<a href="javascript:csboardview('${b.c_no }')">${b.c_subject }</a>
+																	<a href="javascript:csboardview('${b.c_no }')">${b.c_subject } (0)</a>
 																</div>
 																<div class="writer">${b.c_name }</div>
 																<div class="date">${b.c_wdate }</div>
@@ -541,9 +541,44 @@
 													                    <dd id="filename"></dd>
 													                </dl>
 													            </div>
-													            <div class="cont" id="content">
+													            <div class="cont" id="content" style="margin-bottom: 30px">
 													            
 													            </div>
+													            
+													            
+													            
+													            <div class="comment-list">
+				                                                    <div class="single-comment justify-content-between d-flex">
+				                                                       <div class="user justify-content-between d-flex">
+				                                                          <div class="thumb" style="padding-right:20px;">
+				                                                             <img src="assets/img/comment/comment_1.png" alt="">
+				                                                          </div>
+				                                                          <div class="desc">
+				                                                             <p class="comments">
+				                                                             	
+				                                                             </p>
+				                                                             <div class="d-flex justify-content-between">
+				                                                                <div class="d-flex align-items-center">
+				                                                                   <h5>
+				                                                                      <a href="#">
+				                                                                      	asdasdasd
+				                                                                      </a>
+				                                                                   </h5>
+				                                                                <!--   <p class="date">December 4, 2017 at 3:12 pm </p> --> 
+				                                                                </div>
+				                                                                
+				                                                                <!-- <div class="reply-btn">
+				                                                                    <a href="#" class="btn-reply text-uppercase" style="color: goldenrod;">reply</a>
+				                                                                </div> -->
+				                                                             </div>
+				                                                          </div>
+				                                                       </div>
+				                                                    </div>
+				                                                    <hr>
+				                                                 </div>
+				                                                 
+													             
+													            
 													        </div>
 													
 													        <div class="form-group mt-3">

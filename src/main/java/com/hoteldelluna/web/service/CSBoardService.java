@@ -215,6 +215,56 @@ public class CSBoardService {
 		return csboardLists;
 	}
 
+	public ArrayList<CSBoard> csReplyList(int c_grp) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		ArrayList<CSBoard> csboardLists = new ArrayList<CSBoard>();
+		try {
+			conn = this.dataSource.getConnection();
+
+			String sql = "select * from cs_board where c_grp = ? and c_grps>0 order by c_grps desc";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, c_grp);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				CSBoard to = new CSBoard();
+				to.setC_no(rs.getString("c_no"));
+				to.setC_subject(rs.getString("c_subject"));
+				to.setC_name(rs.getString("c_name"));
+				int index = rs.getString("c_wdate").indexOf(' ');
+				String date = rs.getString("c_wdate").substring(0, index);
+				to.setC_wdate(date);
+				to.setC_hit(rs.getString("c_hit"));
+				/* to.setC_wgap(rs.getInt("c_wgap")); */
+
+				csboardLists.add(to);
+			}
+		} catch (SQLException e) {
+			System.out.println("에러: " + e.getMessage());
+		} finally {
+			if (rs != null)
+				try {
+					rs.close();
+				} catch (SQLException e) {
+				}
+			if (pstmt != null)
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+				}
+			if (conn != null)
+				try {
+					conn.close();
+				} catch (SQLException e) {
+				}
+		}
+		return csboardLists;
+	}
+	
+	
 //	public CSBoardList csboardList(CSBoardList listTO) {
 //		Connection conn = null;
 //		PreparedStatement pstmt = null;

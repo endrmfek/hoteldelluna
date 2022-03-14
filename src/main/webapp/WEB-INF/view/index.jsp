@@ -102,7 +102,7 @@
                                     <ul id="navigation">                                                                                                                                     
                                         <li><a href="index">Home</a></li>
                                         <li><a href="noticelist">Notice</a></li>
-                                        <li><a href="faqlist">Q&A</a></li>
+                                        <li><a href="faqlist">FAQ</a></li>
                                         
                                         
                                         <!-- <li><a href="blog.html">Community</a>

@@ -1,6 +1,7 @@
 package com.hoteldelluna.web.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -48,9 +49,21 @@ public class LoginFormController extends HttpServlet{
 		
 		LoginService service = new LoginService();
 		
-		service.insertLogin(login);
+		int flag = service.insertLogin(login);
+		
+		PrintWriter out = response.getWriter();
+		
+		out.println("<script type='text/javascript'>");
+		if(flag == 1) {
+			out.println("alert('success.');");
+			out.println("location.href='login';");
+		} else if(flag == 0) {
+			out.println("alert('fail.');");
+			out.println("history.back();");
+		}
+		out.println("</script>");
 		
 		
-		response.sendRedirect("login");
+		
 	}
 }

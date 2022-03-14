@@ -1,5 +1,5 @@
-<%@page import="com.hoteldelluna.web.entity.CSBoard"%>
-<%@page import="com.hoteldelluna.web.service.CSBoardService"%>
+<%@page import="com.hoteldelluna.web.entity.CSBoardTO"%>
+<%@page import="com.hoteldelluna.web.service.CSBoardDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
@@ -7,14 +7,14 @@
 <%@ page import="java.util.ArrayList" %>
 
 <%
-	CSBoardService dao = new CSBoardService();
-	ArrayList<CSBoard> csboardLists = dao.csboardList();
+	CSBoardDAO dao = new CSBoardDAO();
+	ArrayList<CSBoardTO> csboardLists = dao.csboardList();
 
 	int totalRecord = csboardLists.size();
 	
 	StringBuffer sbHtml = new StringBuffer();
 		
-		for(CSBoard to : csboardLists) {
+		for(CSBoardTO to : csboardLists) {
 			String c_no = to.getC_no();
 			
 			int c_grpl = to.getC_grpl();
@@ -34,7 +34,7 @@
 			sbHtml.append("	<td>");
 			
 			if(c_grpl != 0) {
-				sbHtml.append(c_sgrpl + "<img src='images/icon_re2.gif' />" + "&nbsp;&nbsp;");
+				sbHtml.append(c_sgrpl + "<img src='admin/assets/images/samples/icon_re2.gif' />" + "&nbsp;&nbsp;");
 			}
 			sbHtml.append("<a href='csview?c_no=" + c_no + "'>" + c_subject + "</a></td>");
 			sbHtml.append("	<td>" + c_name + "</td>");
@@ -71,7 +71,7 @@
 		<div id="sidebar" class="active">
 			<div class="sidebar-wrapper active">
 				<div class="mylogo">
-					<a href="index.do"><img src="admin/assets/images/logo/logo.png" width="180" height="70"></a>
+					<a href="index.jsp"><img src="admin/assets/images/logo/logo.png" width="180" height="70"></a>
 				</div>
 				<div class="toggler">
 					<a href="#" class="sidebar-hide d-xl-none d-block"><i
@@ -79,7 +79,7 @@
 				</div>
 				<div class="sidebar-menu">
 					<ul class="menu">
-						<li class="sidebar-item active "><a href="index.do"
+						<li class="sidebar-item active "><a href="index.jsp"
 							class='sidebar-link'><i class="bi bi-grid-fill"></i><span>Main</span></a>
 						</li>
 						<li class="sidebar-item  has-sub"><a href="#"
@@ -88,7 +88,7 @@
 									관리</span>
 						</a>
 							<ul class="submenu ">
-								<li class="submenu-item "><a href="users_manager.do">회원
+								<li class="submenu-item "><a href="users_manager.jsp">회원
 										관리</a></li>
 							</ul></li>
 						<li class="sidebar-item  has-sub"><a href="#"
@@ -97,7 +97,7 @@
 									관리</span>
 						</a>
 							<ul class="submenu ">
-								<li class="submenu-item "><a href="reservation_manager.do">예약
+								<li class="submenu-item "><a href="reservation_manager.jsp">예약
 										관리</a></li>
 							</ul></li>
 						<li class="sidebar-item  has-sub"><a href="#"
@@ -106,7 +106,7 @@
 									관리</span>
 						</a>
 							<ul class="submenu ">
-								<li class="submenu-item "><a href="room_manager.do">객실
+								<li class="submenu-item "><a href="room_manager.jsp">객실
 										관리</a></li>
 							</ul></li>
 						<li class="sidebar-item  has-sub"><a href="#"
@@ -115,11 +115,11 @@
 									관리</span>
 						</a>
 							<ul class="submenu ">
-								<li class="submenu-item "><a href="notice_manager.do">Notice</a>
+								<li class="submenu-item "><a href="notice_manager.jsp">Notice</a>
 								</li>
-								<li class="submenu-item "><a href="faqlist.do">FAQ</a>
+								<li class="submenu-item "><a href="FAQ_manager.jsp">FAQ</a>
 								</li>
-								<li class="submenu-item "><a href="cs_manager.do">일대일
+								<li class="submenu-item "><a href="cs_manager.jsp">일대일
 										문의</a></li>
 							</ul></li>
 					</ul>
@@ -160,7 +160,7 @@
 								<!--  
 									<tr>
 										<td>100</td>
-										<td><a href="cs_manager_view.do">진짜 취소 안되나여?</a></td>
+										<td><a href="cs_manager_view.jsp">진짜 취소 안되나여?</a></td>
 										<td>김소정</td>
 										<td>2022-03-04</td>
 										<td>1</td>

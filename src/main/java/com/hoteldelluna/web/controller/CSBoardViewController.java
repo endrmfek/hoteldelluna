@@ -1,7 +1,7 @@
 package com.hoteldelluna.web.controller;
 
 import java.io.IOException;
-import java.util.List;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,7 +13,6 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import com.hoteldelluna.web.entity.CSBoard;
-import com.hoteldelluna.web.entity.Login;
 import com.hoteldelluna.web.service.CSBoardService;
 
 @WebServlet("/csboardView")
@@ -24,16 +23,17 @@ public class CSBoardViewController extends HttpServlet{
 		String board_no = request.getParameter("board_no");
 		CSBoardService boardService = new CSBoardService();
 		CSBoard board = boardService.csboardView(board_no);
-		response.getWriter().write(getJson(board));
+		ArrayList<CSBoard> reply = boardService.csReplyList(Integer.parseInt(board_no));
+		System.out.println(reply.size());
+		
+		request.setAttribute("reply", reply);
+		response.getWriter().write(getJson(board, reply));
 		
 	}
 	
-	public String getJson(CSBoard board) { //중복되는 아이디 검사하는거
+	public String getJson(CSBoard board , ArrayList<CSBoard> reply) { 
 		
 		JSONArray arr = new JSONArray();
-		
-		
-			
 			JSONObject obj = new JSONObject();
 			
 			obj.put("subject", board.getC_subject());
@@ -47,7 +47,6 @@ public class CSBoardViewController extends HttpServlet{
 			
 			
 			arr.add(obj);
-		
 		
 		JSONObject result = new JSONObject();
 		result.put("result" , arr);

@@ -79,12 +79,12 @@
     			$.each( json.result, function(index, item) {
     				
     				if($("#id").val() == item.id) {
-    					$("label[for = 'id' ]").append('<span style="color:red;">중복이야 ^^</span>');
+    					$("label[for = 'id' ]").append('<span style="color:red;">duplication</span>');
     					check=true;
     				}
     			});
     			if(!check) {
-    				$("label[for = 'id' ]").append('<span style="color:blue;">합격 !</span>');	
+    				$("label[for = 'id' ]").append('<span style="color:blue;">good !</span>');	
     			}
     			
     			
@@ -99,9 +99,9 @@
     const pwd_overlap_check = function() { // pwd 중복체크 갑시당
     	var check = false;
     	if($("#password").val() != $("#re_password").val()) {
-    		$("#pwd_check_text").text("안될것같은데요?").css({"color":"red"});    		
+    		$("#pwd_check_text").text("no").css({"color":"red"});    		
     	} else {
-    		$("#pwd_check_text").text("합격").css({"color":"blue"});
+    		$("#pwd_check_text").text("good").css({"color":"blue"});
     	}
     }
     
@@ -197,7 +197,7 @@
 	              </div>
 	              <div class="form-inline">
 	                <!-- <label for="email">ID</label> -->
-	                <input type="button" class="form-input" id="id_overlap" value="중복확인" onclick="id_overlap_check()"/>
+	                <input type="button" class="form-input" id="id_overlap" value="duplication check" onclick="id_overlap_check()"/>
 	                
 	              </div>
               </div>

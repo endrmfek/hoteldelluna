@@ -35,7 +35,7 @@ public class LoginService {
 		
 	}
 
-	public void insertLogin(Login login) {
+	public int insertLogin(Login login) {
 		int result = 0;
 		
 		//String sql1 = "insert into login (id, pwd, repwd, name, birth, gender, email, phone, isdel) VALUES ( ? , ? , ? , ? , ? , ? , ? , ? , 0)";
@@ -66,6 +66,8 @@ public class LoginService {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} 
+		
+		return result;
 
 	}
 

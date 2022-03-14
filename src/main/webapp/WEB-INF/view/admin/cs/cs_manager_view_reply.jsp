@@ -56,7 +56,7 @@
 		<div id="sidebar" class="active">
 			<div class="sidebar-wrapper active">
 				<div class="mylogo">
-					<a href="index.do"><img src="admin/assets/images/logo/logo.png" width="180" height="70"></a>
+					<a href="index.jsp"><img src="admin/assets/images/logo/logo.png" width="180" height="70"></a>
 				</div>
 				<div class="toggler">
 					<a href="#" class="sidebar-hide d-xl-none d-block"><i
@@ -65,7 +65,7 @@
 				<div class="sidebar-menu">
 					<ul class="menu">          
             <li class="sidebar-item active ">
-            	<a href="index" class='sidebar-link'>
+            	<a href="index.jsp" class='sidebar-link'>
               	  <i class="bi bi-grid-fill"></i>
                	  <span>Main</span>
             	</a>
@@ -77,7 +77,7 @@
             </a>
             <ul class="submenu ">
                 <li class="submenu-item ">
-                    <a href="users_manager">회원 관리</a>
+                    <a href="users_manager.jsp">회원 관리</a>
                 </li>
             </ul>
         </li>
@@ -88,7 +88,7 @@
             </a>
             <ul class="submenu ">
                 <li class="submenu-item ">
-                    <a href="reservation_manager.do">예약 관리</a>
+                    <a href="reservation_manager.jsp">예약 관리</a>
                 </li>
             </ul>
         </li>
@@ -99,7 +99,7 @@
             </a>
             <ul class="submenu ">
                 <li class="submenu-item ">
-                    <a href="room_manager.do">객실 관리</a>
+                    <a href="room_manager.jsp">객실 관리</a>
                 </li>
             </ul>
         </li>
@@ -110,13 +110,13 @@
             </a>
             <ul class="submenu ">
                 <li class="submenu-item ">
-                    <a href="notice_manager.do">Notice</a>
+                    <a href="notice_manager.jsp">Notice</a>
                 </li>
                 <li class="submenu-item ">
-                    <a href="faqlist.do">FAQ</a>
+                    <a href="FAQ_manager.jsp">FAQ</a>
                 </li>
                 <li class="submenu-item ">
-                    <a href="cs_manager.do">일대일 문의</a>
+                    <a href="cs_manager.jsp">일대일 문의</a>
                 </li>
             </ul>
         </li>             
@@ -146,7 +146,7 @@
 					<div class="card">
 						<div class="card-body">
 							<div class="con_txt">
-								<form action="csreply" method="post" name="csfrm">
+								<form action="./csreply" method="post" name="csfrm">
 								<input type="hidden" name="c_no" value="<%=c_no %>"/>
 									<div class="contents_sub">
 										<!--게시판-->
@@ -179,7 +179,7 @@
 										<div class="btn_area">
 											<div class="align_left">
 												<input type="button" value="목록" class="btn_list btn_txt02" style="cursor: pointer;"
-													onclick="location.href='cs_manager_view.do?c_no=<%=c_no %>'" />
+													onclick="location.href='cs_manager_view.jsp?c_no=<%=c_no %>'" />
 											</div>
 											<div class="align_right">
 												<input type="button" id="csbtn" value="답글쓰기" class="btn_write btn_txt01" style="cursor: pointer;" />
